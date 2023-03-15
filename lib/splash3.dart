@@ -23,7 +23,7 @@ class _splash3State extends State<splash3> {
             height: 20,
           ),
      
-          Container(                            //skip icon
+          Container(                            //Here, skip the icon
             margin:EdgeInsets.only(left:310) ,
             child:TextButton(
           child: Text("Skip"),
