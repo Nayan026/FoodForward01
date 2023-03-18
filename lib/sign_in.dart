@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'demo.dart';
 
 class sign_in extends StatefulWidget {
   const sign_in({super.key});
@@ -154,7 +155,13 @@ class _sign_inState extends State<sign_in> {
                     style: TextButton.styleFrom(
                       primary: Colors.black,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => log_in()),
+                          );
+                    },
                   ),
                 ),
                  
