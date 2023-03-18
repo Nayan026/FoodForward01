@@ -10,6 +10,7 @@ class sign_in extends StatefulWidget {
 }
 
 class _sign_inState extends State<sign_in> {
+   String? gender;
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   @override
@@ -37,17 +38,63 @@ class _sign_inState extends State<sign_in> {
                 Container(
                   padding: const EdgeInsets.all(10),
                   child: TextField(
-                    controller: nameController,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Name of Your Organization',
                     ),
                   ),
                 ),
+                 Container( 
+                  alignment: Alignment.center,
+            padding: EdgeInsets.all(10),
+            child: 
+          Column(
+            
+            children: [
+                Align( 
+                  alignment: Alignment.topLeft,
+                  child:Text("Who are you ?", 
+                  
+                style: TextStyle( 
+                    fontSize: 18,
+                    
+                ),),
+                ),
+               
+
+                Divider(),
+                
+                RadioListTile(
+                  
+                    title: Text("Hotel/Mess"),
+                    value: "hotel", 
+                    groupValue: gender, 
+                    onChanged: (value){
+                      setState(() {
+                          gender = value.toString();
+                      });
+                    },
+                ),
+
+                RadioListTile(
+                    title: Text("NGO"),
+                    value: "NGO", 
+                    groupValue: gender, 
+                    onChanged: (value){
+                      setState(() {
+                          gender = value.toString();
+                      });
+                    },
+                ),
+
+               
+            ],
+          ),
+                ),
                 Container(
                   padding: const EdgeInsets.all(10),
                   child: TextField(
-                    controller: nameController,
+                    
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Email',
@@ -57,7 +104,7 @@ class _sign_inState extends State<sign_in> {
                 Container(
                   padding: const EdgeInsets.all(10),
                   child: TextField(
-                    controller: nameController,
+                    
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Password',
@@ -67,7 +114,7 @@ class _sign_inState extends State<sign_in> {
                 Container(
                   padding: const EdgeInsets.all(10),
                   child: TextField(
-                    controller: nameController,
+                    
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Address',
@@ -77,7 +124,7 @@ class _sign_inState extends State<sign_in> {
                 Container(
                   padding: const EdgeInsets.all(10),
                   child: TextField(
-                    controller: nameController,
+                    
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Contact No',
@@ -110,6 +157,7 @@ class _sign_inState extends State<sign_in> {
                     onPressed: () {},
                   ),
                 ),
+                 
                
               ]),
         ));
