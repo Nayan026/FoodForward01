@@ -154,19 +154,7 @@ class _sign_inState extends State<sign_in> {
                         elevation: 0,
                       ),
                       onPressed: () {
-                        if (gender == 'hotel') {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const hotel_screen()),
-                          );
-                        } else if (gender == 'NGO') {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ngo_screen()),
-                          );
-                        }
+                        
                         // for realtime database
                         Map<String, String> database = {
                           'name of organizatio':
