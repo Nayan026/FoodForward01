@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_1/sign_in.dart';
+import 'home_screen.dart';
 
 class log_in extends StatefulWidget {
   const log_in({super.key});
@@ -11,6 +13,8 @@ class log_in extends StatefulWidget {
 }
 
 class _log_inState extends State<log_in> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +41,7 @@ class _log_inState extends State<log_in> {
                 Container(
                   padding: const EdgeInsets.all(10),
                   child: TextField(
-                    
+                    controller: emailController,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Email',
@@ -47,7 +51,7 @@ class _log_inState extends State<log_in> {
                 Container(
                   padding: const EdgeInsets.all(10),
                   child: TextField(
-                    
+                    controller: passwordController,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Password',
@@ -63,6 +67,19 @@ class _log_inState extends State<log_in> {
                         elevation: 0,
                       ),
                       onPressed: () {
+                         FirebaseAuth.instance.signInWithEmailAndPassword(
+                        email: emailController.text, 
+                        password: passwordController.text)
+                      .then((value){
+                         Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => home_screen()),
+                          );
+
+                      } ).onError((error, stackTrace) {
+                          print("Error ${error.toString()}");
+                        });
                       },
                     )),
                 Container(
@@ -74,11 +91,8 @@ class _log_inState extends State<log_in> {
                       primary: Colors.black,
                     ),
                     onPressed: () {
-                       Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => sign_in()),
-                          );
+                     
+                       
                     },
                   ),
                 ),

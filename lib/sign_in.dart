@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'demo.dart';
+import 'home_screen.dart';
+import 'splash3.dart';
 
 class sign_in extends StatefulWidget {
   const sign_in({super.key});
@@ -12,7 +15,7 @@ class sign_in extends StatefulWidget {
 
 class _sign_inState extends State<sign_in> {
    String? gender;
-  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -95,7 +98,7 @@ class _sign_inState extends State<sign_in> {
                 Container(
                   padding: const EdgeInsets.all(10),
                   child: TextField(
-                    
+                    controller: emailController,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Email',
@@ -105,6 +108,7 @@ class _sign_inState extends State<sign_in> {
                 Container(
                   padding: const EdgeInsets.all(10),
                   child: TextField(
+                    controller: passwordController,
                     
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
@@ -141,10 +145,21 @@ class _sign_inState extends State<sign_in> {
                         elevation: 0,
                       ),
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => sign_in()),
-                        );
+                        FirebaseAuth.instance
+                        .createUserWithEmailAndPassword(email: emailController.text, 
+                        password: passwordController.text)
+                        .then((value) {
+                          print("created new account");
+                      Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => home_screen()),
+                          );
+                        })
+                        .onError((error, stackTrace) {
+                          print("Error ${error.toString()}");
+                        });
+                        
                       },
                     )),
                 Container(
