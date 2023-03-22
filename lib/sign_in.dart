@@ -79,9 +79,9 @@ class _sign_inState extends State<sign_in> {
                           ),
                         ),
                       ),
-                      Divider(),
+                      Divider(),                    //For Hostel Mess
                       RadioListTile(
-                        title: Text("Hotel/Mess"),
+                        title: Text("Hotel/Mess"),          
                         value: "hotel",
                         groupValue: gender,
                         onChanged: (value) {
@@ -182,7 +182,7 @@ class _sign_inState extends State<sign_in> {
                     )),
                 Container(
                   //skip icon
-                  alignment: Alignment.center,
+                  alignment: Alignment.center,                 //Already Have Account
                   child: TextButton(
                     child: Text("Already Have Account\n                Log In"),
                     style: TextButton.styleFrom(
