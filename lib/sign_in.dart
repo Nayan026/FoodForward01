@@ -82,9 +82,9 @@ class _sign_inState extends State<sign_in> {
                           ),
                         ),
                       ),
-                      const Divider(),
+                      Divider(),
                       RadioListTile(
-                        title: const Text("Hotel/Mess"),
+                        title: Text("Hotel/Mess"),
                         value: "hotel",
                         groupValue: gender,
                         onChanged: (value) {
@@ -206,7 +206,7 @@ class _sign_inState extends State<sign_in> {
                     )),
                 Container(
                   //skip icon
-                  alignment: Alignment.center,
+                  alignment: Alignment.center,                 //Already Have Account
                   child: TextButton(
                     style: TextButton.styleFrom(
                       primary: Colors.black,
