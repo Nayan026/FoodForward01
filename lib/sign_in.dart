@@ -1,11 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'demo.dart';
 import 'home_screen.dart';
 import 'splash3.dart';
+import 'ngo_screen.dart';
+import 'hotel_screen.dart';
 
 class sign_in extends StatefulWidget {
   sign_in({super.key});
@@ -36,7 +39,7 @@ class _sign_inState extends State<sign_in> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xFFf9f8f7),
+        backgroundColor: const Color(0xFFf9f8f7),
         body: SingleChildScrollView(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -52,7 +55,7 @@ class _sign_inState extends State<sign_in> {
                       textScaleFactor: 2.0,
                       style: TextStyle(color: Colors.brown, fontSize: 15.0),
                     )),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Container(
@@ -70,7 +73,7 @@ class _sign_inState extends State<sign_in> {
                   padding: EdgeInsets.all(10),
                   child: Column(
                     children: [
-                      Align(
+                      const Align(
                         alignment: Alignment.topLeft,
                         child: Text(
                           "Who are you ?",
@@ -79,24 +82,24 @@ class _sign_inState extends State<sign_in> {
                           ),
                         ),
                       ),
-                      Divider(),
+                      const Divider(),
                       RadioListTile(
-                        title: Text("Hotel/Mess"),
+                        title: const Text("Hotel/Mess"),
                         value: "hotel",
                         groupValue: gender,
                         onChanged: (value) {
                           setState(() {
-                            gender = value.toString();
+                            gender = value;
                           });
                         },
                       ),
                       RadioListTile(
-                        title: Text("NGO"),
+                        title: const Text("NGO"),
                         value: "NGO",
                         groupValue: gender,
                         onChanged: (value) {
                           setState(() {
-                            gender = value.toString();
+                            gender = value;
                           });
                         },
                       ),
@@ -146,12 +149,24 @@ class _sign_inState extends State<sign_in> {
                 Container(
                     alignment: Alignment.center,
                     child: ElevatedButton(
-                      child: const Text("Sign In"),
                       style: ElevatedButton.styleFrom(
-                        primary: Color(0xFFe8772e),
+                        primary: const Color(0xFFe8772e),
                         elevation: 0,
                       ),
                       onPressed: () {
+                        if (gender == 'hotel') {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const hotel_screen()),
+                          );
+                        } else if (gender == 'NGO') {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ngo_screen()),
+                          );
+                        }
                         // for realtime database
                         Map<String, String> database = {
                           'name of organizatio':
@@ -170,30 +185,39 @@ class _sign_inState extends State<sign_in> {
                                 password: passwordController.text)
                             .then((value) {
                           print("created new account");
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => home_screen()),
-                          );
+                          if (gender == 'hotel') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const hotel_screen()),
+                            );
+                          } else if (gender == 'NGO') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const ngo_screen()),
+                            );
+                          }
                         }).onError((error, stackTrace) {
                           print("Error ${error.toString()}");
                         });
                       },
+                      child: const Text("Sign In"),
                     )),
                 Container(
                   //skip icon
                   alignment: Alignment.center,
                   child: TextButton(
-                    child: Text("Already Have Account\n                Log In"),
                     style: TextButton.styleFrom(
                       primary: Colors.black,
                     ),
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => log_in()),
+                        MaterialPageRoute(builder: (context) => const log_in()),
                       );
                     },
+                    child: const Text("Already Have Account\n                Log In"),
                   ),
                 ),
               ]),
