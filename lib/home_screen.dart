@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter_application_1/splash1.dart';
-import 'demo.dart';
+
+import 'Splash/splash1.dart';
+import 'package:flutter_application_1/Authentication/demo.dart';
+
 
 class home_screen extends StatelessWidget {
   const home_screen({super.key});

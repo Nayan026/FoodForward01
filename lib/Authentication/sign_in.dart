@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'demo.dart';
-import 'home_screen.dart';
-import 'splash3.dart';
-import 'ngo_screen.dart';
-import 'hotel_screen.dart';
+
+import 'package:flutter_application_1/home_screen.dart';
+import 'package:flutter_application_1/ngo_screen.dart';
+
+import 'package:flutter_application_1/hotel_screen.dart';
 
 class sign_in extends StatefulWidget {
   sign_in({super.key});

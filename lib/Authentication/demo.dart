@@ -2,8 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter_application_1/sign_in.dart';
-import 'home_screen.dart';
+import 'package:flutter_application_1/hotel_screen.dart';
+import 'package:flutter_application_1/home_screen.dart';
+import 'package:flutter_application_1/Authentication/sign_in.dart';
+
 
 class log_in extends StatefulWidget {
   const log_in({super.key});
@@ -74,7 +76,7 @@ class _log_inState extends State<log_in> {
                          Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => home_screen()),
+                                builder: (context) => hotel_screen()),
                           );
 
                       } ).onError((error, stackTrace) {

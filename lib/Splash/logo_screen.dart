@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter_application_1/splash1.dart';
+
+
+import 'package:flutter_application_1/Splash/splash1.dart';
 
 class logo_screen extends StatelessWidget {                //Logo Screen Class 
   const logo_screen({super.key});

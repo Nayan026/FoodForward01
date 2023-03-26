@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
-import 'sign_in.dart';
+
+
+import 'package:flutter_application_1/Authentication/sign_in.dart';
 
 class splash3 extends StatefulWidget {
   const splash3({super.key});

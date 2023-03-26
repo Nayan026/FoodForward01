@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'splash1.dart';
-import 'logo_screen.dart';
+import "Splash/splash1.dart";
 import 'package:firebase_core/firebase_core.dart';
+import 'Splash/logo_screen.dart';
 
 void main() async{                                //Main Function Added
   WidgetsFlutterBinding.ensureInitialized();
