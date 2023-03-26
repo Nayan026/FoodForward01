@@ -19,8 +19,9 @@ class sign_in extends StatefulWidget {
   State<sign_in> createState() => _sign_inState();
 }
 
+
 class _sign_inState extends State<sign_in> {
-  String? gender;
+  String? role;
   //
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -31,12 +32,15 @@ class _sign_inState extends State<sign_in> {
 
   // for realtime database
   late DatabaseReference dbRef;
+  
 
   @override
   void initState() {
     super.initState();
     dbRef = FirebaseDatabase.instance.ref().child('FoodForwardDatabase');
+    
   }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -88,20 +92,20 @@ class _sign_inState extends State<sign_in> {
                       RadioListTile(
                         title: Text("Hotel/Mess"),
                         value: "hotel",
-                        groupValue: gender,
+                        groupValue: role,
                         onChanged: (value) {
                           setState(() {
-                            gender = value;
+                            role = value;
                           });
                         },
                       ),
                       RadioListTile(
                         title: const Text("NGO"),
                         value: "NGO",
-                        groupValue: gender,
+                        groupValue: role,
                         onChanged: (value) {
                           setState(() {
-                            gender = value;
+                            role = value;
                           });
                         },
                       ),
@@ -164,7 +168,8 @@ class _sign_inState extends State<sign_in> {
                           'email': emailController.text,
                           'password': passwordController.text,
                           'address': addressController.text,
-                          'contactNo': contactNoController.text
+                          'contactNo': contactNoController.text,
+                          'role':role ?? ""
                         };
 
                         dbRef.push().set(database);
@@ -175,13 +180,13 @@ class _sign_inState extends State<sign_in> {
                                 password: passwordController.text)
                             .then((value) {
                           print("created new account");
-                          if (gender == 'hotel') {
+                          if (role == 'hotel') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => const hotel_screen()),
                             );
-                          } else if (gender == 'NGO') {
+                          } else if (role == 'NGO') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
