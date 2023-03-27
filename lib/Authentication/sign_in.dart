@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
@@ -19,7 +19,6 @@ class sign_in extends StatefulWidget {
   State<sign_in> createState() => _sign_inState();
 }
 
-
 class _sign_inState extends State<sign_in> {
   String? role;
   //
@@ -29,18 +28,44 @@ class _sign_inState extends State<sign_in> {
   TextEditingController nameofOrganizationController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController contactNoController = TextEditingController();
+  
+  // length controller of the contact no
+  int length = 0;
+  _onChanged(String value) {
+    setState(() {
+      length = value.length;
+    });
+
+    if (length == 10) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title:
+                new Text('Sorry, You have Reached the Maximum input limit...'),
+            actions: <Widget>[
+              Container(
+                  child: ElevatedButton(
+                child: Text("Ok"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )),
+            ],
+          );
+        },
+      );
+    }
+  }
 
   // for realtime database
   late DatabaseReference dbRef;
-  
 
   @override
   void initState() {
     super.initState();
     dbRef = FirebaseDatabase.instance.ref().child('FoodForwardDatabase');
-    
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +101,7 @@ class _sign_inState extends State<sign_in> {
                 ),
                 Container(
                   alignment: Alignment.center,
-                  padding: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
                   child: Column(
                     children: [
                       const Align(
@@ -88,9 +113,9 @@ class _sign_inState extends State<sign_in> {
                           ),
                         ),
                       ),
-                      Divider(),
+                      const Divider(),
                       RadioListTile(
-                        title: Text("Hotel/Mess"),
+                        title: const Text("Hotel/Mess"),
                         value: "hotel",
                         groupValue: role,
                         onChanged: (value) {
@@ -126,6 +151,7 @@ class _sign_inState extends State<sign_in> {
                   padding: const EdgeInsets.all(10),
                   child: TextField(
                     controller: passwordController,
+                    obscureText: true,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Password',
@@ -144,23 +170,26 @@ class _sign_inState extends State<sign_in> {
                 ),
                 Container(
                   padding: const EdgeInsets.all(10),
+                  // ignore: unnecessary_new
                   child: TextField(
-                    controller: contactNoController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Contact No',
-                    ),
+                    decoration:
+                        const InputDecoration(labelText: "Enter your number"),
+                    keyboardType: TextInputType.number,
+                    onChanged: _onChanged,
+                    maxLength: 10,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.digitsOnly
+                    ], // Only numbers can be entered
                   ),
                 ),
                 Container(
                     alignment: Alignment.center,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: const Color(0xFFe8772e),
+                        backgroundColor: const Color(0xFFe8772e),
                         elevation: 0,
                       ),
                       onPressed: () {
-                        
                         // for realtime database
                         Map<String, String> database = {
                           'name of organizatio':
@@ -169,11 +198,11 @@ class _sign_inState extends State<sign_in> {
                           'password': passwordController.text,
                           'address': addressController.text,
                           'contactNo': contactNoController.text,
-                          'role':role.toString()
+                          'role': role.toString()
                         };
 
                         dbRef.push().set(database);
-
+                        
                         FirebaseAuth.instance
                             .createUserWithEmailAndPassword(
                                 email: emailController.text,
@@ -184,13 +213,13 @@ class _sign_inState extends State<sign_in> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const hotel_screen()),
+                                  builder: (context) => const ngo_screen()),
                             );
                           } else if (role == 'NGO') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const ngo_screen()),
+                                  builder: (context) => const hotel_screen()),
                             );
                           }
                         }).onError((error, stackTrace) {
@@ -201,7 +230,7 @@ class _sign_inState extends State<sign_in> {
                     )),
                 Container(
                   //skip icon
-                  alignment: Alignment.center,                 //Already Have Account
+                  alignment: Alignment.center, //Already Have Account
                   child: TextButton(
                     style: TextButton.styleFrom(
                       primary: Colors.black,
@@ -212,7 +241,8 @@ class _sign_inState extends State<sign_in> {
                         MaterialPageRoute(builder: (context) => const log_in()),
                       );
                     },
-                    child: const Text("Already Have Account\n                Log In"),
+                    child: const Text(
+                        "Already Have Account\n                Log In"),
                   ),
                 ),
               ]),
