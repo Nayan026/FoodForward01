@@ -1,7 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_1/hotel_screen.dart';
 import 'package:flutter_application_1/home_screen.dart';
 import 'package:flutter_application_1/Authentication/sign_in.dart';
@@ -17,6 +15,7 @@ class log_in extends StatefulWidget {
 class _log_inState extends State<log_in> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  late String role;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +35,7 @@ class _log_inState extends State<log_in> {
                       textScaleFactor: 2.0,
                       style: TextStyle(color: Colors.brown, fontSize: 15.0),
                     )),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 
@@ -63,9 +62,8 @@ class _log_inState extends State<log_in> {
                 Container(
                     alignment: Alignment.center,
                     child: ElevatedButton(
-                      child: const Text("Log In"),
                       style: ElevatedButton.styleFrom(
-                        primary: Color(0xFFe8772e),
+                        backgroundColor: const Color(0xFFe8772e),
                         elevation: 0,
                       ),
                       onPressed: () {
@@ -76,26 +74,27 @@ class _log_inState extends State<log_in> {
                          Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => hotel_screen()),
+                                builder: (context) => const hotel_screen()),
                           );
 
                       } ).onError((error, stackTrace) {
                           print("Error ${error.toString()}");
                         });
                       },
+                      child: const Text("Log In"),
                     )),
                 Container(
                   //skip icon
                   alignment: Alignment.center,
                   child: TextButton(
-                    child: Text("Dont Have Account\n            Sign In"),
                     style: TextButton.styleFrom(
-                      primary: Colors.black,
+                      backgroundColor: Colors.black,
                     ),
                     onPressed: () {
                      
                        
                     },
+                    child: const Text("Dont Have Account\n            Sign In"),
                   ),
                 ),
                  
