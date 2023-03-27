@@ -32,7 +32,13 @@ class _splash3State extends State<splash3> {
           style: TextButton.styleFrom(
             primary: Colors.black,
           ),
-          onPressed: () {},
+          onPressed: () {
+             Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>  sign_in()),
+                          );
+          },
         ),
           ),
           const SizedBox(

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'splash3.dart';
+import 'package:flutter_application_1/Authentication/sign_in.dart';
+
+
 class splash2 extends StatefulWidget {
   const splash2({super.key});
 
@@ -29,7 +32,13 @@ class _splash2State extends State<splash2> {
           style: TextButton.styleFrom(
             primary: Colors.black,
           ),
-          onPressed: () {},
+          onPressed: () {
+             Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>  sign_in()),
+                          );
+          },
         ),
           ),
           const SizedBox(
