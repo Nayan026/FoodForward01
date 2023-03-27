@@ -169,7 +169,7 @@ class _sign_inState extends State<sign_in> {
                           'password': passwordController.text,
                           'address': addressController.text,
                           'contactNo': contactNoController.text,
-                          'role':role ?? ""
+                          'role':role.toString()
                         };
 
                         dbRef.push().set(database);
