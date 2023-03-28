@@ -28,7 +28,7 @@ class _sign_inState extends State<sign_in> {
   TextEditingController nameofOrganizationController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController contactNoController = TextEditingController();
-  
+
   // length controller of the contact no
   int length = 0;
   _onChanged(String value) {
@@ -172,6 +172,7 @@ class _sign_inState extends State<sign_in> {
                   padding: const EdgeInsets.all(10),
                   // ignore: unnecessary_new
                   child: TextField(
+                    controller: contactNoController,
                     decoration:
                         const InputDecoration(labelText: "Enter your number"),
                     keyboardType: TextInputType.number,
@@ -202,7 +203,7 @@ class _sign_inState extends State<sign_in> {
                         };
 
                         dbRef.push().set(database);
-                        
+
                         FirebaseAuth.instance
                             .createUserWithEmailAndPassword(
                                 email: emailController.text,
