@@ -136,8 +136,3 @@ class _log_inState extends State<log_in> {
         ));
   }
 }
-
-class ForwardingStreamSubscription {
-  ForwardingStreamSubscription(
-      Stream<String> stream, StreamController<String> outputController);
-}
