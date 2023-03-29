@@ -36,7 +36,7 @@ class _sign_inState extends State<sign_in> {
       length = value.length;
     });
 
-    if (length == 10) {
+    if (length == 11) {
       showDialog(
         context: context,
         builder: (BuildContext context) {
