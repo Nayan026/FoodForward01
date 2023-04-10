@@ -6,6 +6,7 @@ import 'package:flutter_application_1/hotel_screen.dart';
 import 'package:flutter_application_1/home_screen.dart';
 import 'package:flutter_application_1/Authentication/sign_in.dart';
 import 'package:flutter_application_1/ngo_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class log_in extends StatefulWidget {
   const log_in({super.key});
@@ -34,6 +35,18 @@ class _log_inState extends State<log_in> {
           }
         } as FutureOr Function(DatabaseEvent));
   }*/
+
+  // for firestore database
+  late CollectionReference roleCollection;
+  late DatabaseReference dbRef;
+  @override
+  void initState() {
+    super.initState();
+    // real-time database
+    dbRef = FirebaseDatabase.instance.ref().child('FoodForwardDatabase');
+    // firestore
+    roleCollection = FirebaseFirestore.instance.collection('Roles');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -97,8 +110,8 @@ class _log_inState extends State<log_in> {
                               .child('FoodForwardDatabase')
                               .child('role');*/
 
-                          final ref = FirebaseDatabase.instance.ref();
-                          final snapshot = await ref
+                          dbRef = FirebaseDatabase.instance.ref();
+                          final snapshot = await dbRef
                               .child('FoodForwardDatabase')
                               .child('role')
                               .get();
@@ -108,8 +121,8 @@ class _log_inState extends State<log_in> {
                             print('no data available');
                           }
 
-                          /*
-                          dataReference.onValue.listen((DataSnapshot datasnapshot) {
+                          /*  
+                          dbRef.onValue.listen((DataSnapshot datasnapshot)  {
                             if (datasnapshot.value != null) {
                               role = datasnapshot.value.toString();
                               switch (role) {
@@ -132,7 +145,62 @@ class _log_inState extends State<log_in> {
                             } else {
                               print('Data is null.');
                             }
-                          } as FutureOr Function(DatabaseEvent));*/
+                          } as FutureOr Function(DatabaseEvent)); */
+
+                          // firestore pull-data
+                          /*
+                          roleCollection
+                              .get()
+                              .then((QuerySnapshot querySnapshot) => {
+                                    querySnapshot.docs.forEach((doc) {
+                                      Object? role = doc.data();
+
+                                      // condition
+                                      if (role == 'hotel') {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const ngo_screen(),
+                                            ));
+                                      } else if (role == 'NGO') {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const hotel_screen()));
+                                      }
+                                    })
+                                  })
+                              .catchError((error) =>
+                                  print('Failed to get organizations: $error'));*/
+                          roleCollection
+                              .get()
+                              .then((QuerySnapshot querySnapshot) {
+                            for (QueryDocumentSnapshot documentSnapshot
+                                in querySnapshot.docs) {
+                              String email = documentSnapshot.get('email');
+                              String role = documentSnapshot.get('role');
+                              print('Email: $email');
+                              print('Role: $role');
+
+                              // condition
+                              if (role == 'hotel') {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const ngo_screen(),
+                                    ));
+                              } else if (role == 'NGO') {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const hotel_screen()));
+                              }
+                            }
+                          }).catchError((error) =>
+                                  print('Failed to get organizations: $error'));
 /*
                           if (role == 'hotel') {
                             Navigator.push(

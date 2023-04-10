@@ -5,12 +5,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'demo.dart';
-
 import 'package:flutter_application_1/home_screen.dart';
 import 'package:flutter_application_1/ngo_screen.dart';
-
 import 'package:flutter_application_1/hotel_screen.dart';
 
 class sign_in extends StatefulWidget {
