@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'demo.dart';
 
@@ -61,10 +62,15 @@ class _sign_inState extends State<sign_in> {
   // for realtime database
   late DatabaseReference dbRef;
 
+  // for firestore database
+  late CollectionReference roleCollection;
+
   @override
   void initState() {
     super.initState();
     dbRef = FirebaseDatabase.instance.ref().child('FoodForwardDatabase');
+    // firestore
+    roleCollection = FirebaseFirestore.instance.collection('Roles');
   }
 
   @override
@@ -193,7 +199,7 @@ class _sign_inState extends State<sign_in> {
                       onPressed: () {
                         // for realtime database
                         Map<String, String> database = {
-                          'name of organizatio':
+                          'name of organization':
                               nameofOrganizationController.text,
                           'email': emailController.text,
                           'password': passwordController.text,
@@ -201,8 +207,15 @@ class _sign_inState extends State<sign_in> {
                           'contactNo': contactNoController.text,
                           'role': role.toString()
                         };
-
                         dbRef.push().set(database);
+                        
+                        // firestore
+                        Map<String, dynamic> roleDatabase = {
+                          'email': emailController.text,
+                          'role': role.toString()
+                        };
+
+                        roleCollection.add(roleDatabase);
 
                         FirebaseAuth.instance
                             .createUserWithEmailAndPassword(

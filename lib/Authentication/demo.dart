@@ -17,20 +17,24 @@ class log_in extends StatefulWidget {
 class _log_inState extends State<log_in> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  //String? _role;
+  String? role;
 /*
-  // ignore: non_constant_identifier_names
-  void role_id() {
+  void role_info() {
+    String role;
     final databaseReference = FirebaseDatabase.instance.ref();
-    final dataReference = databaseReference.child('role');
+    final dataReference =
+        databaseReference.child('FoodForwardDatabase').child('role');
 
-    dataReference.onValue.listen((event) {
-      String role = event.snapshot.value.toString();
-      _role = role;
-      //print(role);
-    });
-  }
-*/
+    dataReference.once().then((DataSnapshot snapshot) {
+          if (snapshot.value != null) {
+            role = snapshot.value.toString();
+            print(role);
+          } else {
+            print('Data is null.');
+          }
+        } as FutureOr Function(DatabaseEvent));
+  }*/
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,36 +89,70 @@ class _log_inState extends State<log_in> {
                             .signInWithEmailAndPassword(
                                 email: emailController.text,
                                 password: passwordController.text)
-                            .then((value) {
+                            .then((value) async {
                           /*
-                          dbRef = FirebaseDatabase.instance.ref();
-                          dbRef
+                          final databaseReference =
+                              FirebaseDatabase.instance.ref();
+                          final dataReference = databaseReference
+                              .child('FoodForwardDatabase')
+                              .child('role');*/
+
+                          final ref = FirebaseDatabase.instance.ref();
+                          final snapshot = await ref
                               .child('FoodForwardDatabase')
                               .child('role')
-                              .onValue
-                              .listen((event) {
-                            role = event.snapshot.value as String;
-                          }) as DatabaseReference;*/
+                              .get();
+                          if (snapshot.exists) {
+                            print(snapshot.value);
+                          } else {
+                            print('no data available');
+                          }
+
                           /*
-                          if (_role == 'hotel') {
+                          dataReference.onValue.listen((DataSnapshot datasnapshot) {
+                            if (datasnapshot.value != null) {
+                              role = datasnapshot.value.toString();
+                              switch (role) {
+                                case 'hotel':
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ngo_screen(),
+                                      ));
+                                  break;
+                                case 'ngo':
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const hotel_screen()));
+                                  break;
+                              }
+                            } else {
+                              print('Data is null.');
+                            }
+                          } as FutureOr Function(DatabaseEvent));*/
+/*
+                          if (role == 'hotel') {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => const ngo_screen(),
                                 ));
-                          } else if (_role == 'NGO') {
+                          } else if (role == 'NGO') {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
                                         const hotel_screen()));
                           }*/
-
+                          /*
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const hotel_screen()),
-                          );
+                          );*/
                         }).onError((error, stackTrace) {
                           print("Error ${error.toString()}");
                         });
