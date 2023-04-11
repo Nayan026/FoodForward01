@@ -19,6 +19,8 @@ class _log_inState extends State<log_in> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   String? role;
+  String? email;
+  Object? emailToSearch;
 /*
   void role_info() {
     String role;
@@ -109,7 +111,7 @@ class _log_inState extends State<log_in> {
                           final dataReference = databaseReference
                               .child('FoodForwardDatabase')
                               .child('role');*/
-
+                          /*
                           dbRef = FirebaseDatabase.instance.ref();
                           final snapshot = await dbRef
                               .child('FoodForwardDatabase')
@@ -120,7 +122,7 @@ class _log_inState extends State<log_in> {
                           } else {
                             print('no data available');
                           }
-
+                            */
                           /*  
                           dbRef.onValue.listen((DataSnapshot datasnapshot)  {
                             if (datasnapshot.value != null) {
@@ -148,32 +150,42 @@ class _log_inState extends State<log_in> {
                           } as FutureOr Function(DatabaseEvent)); */
 
                           // firestore pull-data
-                          /*
+
                           roleCollection
                               .get()
                               .then((QuerySnapshot querySnapshot) => {
                                     querySnapshot.docs.forEach((doc) {
-                                      Object? role = doc.data();
+                                      print(doc.data()); // this will all data available in the collection
+                                      
 
-                                      // condition
-                                      if (role == 'hotel') {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const ngo_screen(),
-                                            ));
-                                      } else if (role == 'NGO') {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const hotel_screen()));
-                                      }
+                                      // the above code will pull data from firestore
+                                      // below code is to to pull role which is associated with the email
+                                      String emailToSearch =
+                                          'hotel12@gmail.com'; /* replace with the email - to retrive role associate with the email is
+                                          hard-coed right now but we want it dynamic for hard-coded it works fine */
+
+                                      roleCollection
+                                          .where('email',
+                                              isEqualTo: emailToSearch)
+                                          .get()
+                                          .then((QuerySnapshot querySnapshot) {
+                                        if (querySnapshot.size > 0) {
+                                          // Assuming there is only one matching document, we access the first document in the querySnapshot
+                                          String role =
+                                              querySnapshot.docs[0].get('role');
+                                          print(
+                                              'Role for email $emailToSearch: $role');
+                                        } else {
+                                          print(
+                                              'No role found for email $emailToSearch');
+                                        }
+                                      }).catchError((error) => print(
+                                              'Failed to search roles: $error'));
                                     })
                                   })
                               .catchError((error) =>
-                                  print('Failed to get organizations: $error'));*/
+                                  print('Failed to get organizations: $error'));
+                          /*
                           roleCollection
                               .get()
                               .then((QuerySnapshot querySnapshot) {
@@ -200,7 +212,7 @@ class _log_inState extends State<log_in> {
                               }
                             }
                           }).catchError((error) =>
-                                  print('Failed to get organizations: $error'));
+                                  print('Failed to get organizations: $error')); */
 /*
                           if (role == 'hotel') {
                             Navigator.push(
