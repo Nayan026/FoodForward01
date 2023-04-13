@@ -1,9 +1,12 @@
+import 'dart:async';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/hotel_screen.dart';
 import 'package:flutter_application_1/home_screen.dart';
 import 'package:flutter_application_1/Authentication/sign_in.dart';
-
+import 'package:flutter_application_1/ngo_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class log_in extends StatefulWidget {
   const log_in({super.key});
@@ -15,11 +18,42 @@ class log_in extends StatefulWidget {
 class _log_inState extends State<log_in> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  late String role;
+  String? role;
+  String? email;
+  Object? emailToSearch;
+/*
+  void role_info() {
+    String role;
+    final databaseReference = FirebaseDatabase.instance.ref();
+    final dataReference =
+        databaseReference.child('FoodForwardDatabase').child('role');
+
+    dataReference.once().then((DataSnapshot snapshot) {
+          if (snapshot.value != null) {
+            role = snapshot.value.toString();
+            print(role);
+          } else {
+            print('Data is null.');
+          }
+        } as FutureOr Function(DatabaseEvent));
+  }*/
+
+  // for firestore database
+  late CollectionReference roleCollection;
+  late DatabaseReference dbRef;
+  @override
+  void initState() {
+    super.initState();
+    // real-time database
+    dbRef = FirebaseDatabase.instance.ref().child('FoodForwardDatabase');
+    // firestore
+    roleCollection = FirebaseFirestore.instance.collection('Roles');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       backgroundColor: Color(0xFFf9f8f7),
+        backgroundColor: Color(0xFFf9f8f7),
         body: SingleChildScrollView(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -38,7 +72,6 @@ class _log_inState extends State<log_in> {
                 const SizedBox(
                   height: 20,
                 ),
-                
                 Container(
                   padding: const EdgeInsets.all(10),
                   child: TextField(
@@ -67,17 +100,140 @@ class _log_inState extends State<log_in> {
                         elevation: 0,
                       ),
                       onPressed: () {
-                         FirebaseAuth.instance.signInWithEmailAndPassword(
-                        email: emailController.text, 
-                        password: passwordController.text)
-                      .then((value){
-                         Navigator.push(
+                        FirebaseAuth.instance
+                            .signInWithEmailAndPassword(
+                                email: emailController.text,
+                                password: passwordController.text)
+                            .then((value) async {
+                          /*
+                          final databaseReference =
+                              FirebaseDatabase.instance.ref();
+                          final dataReference = databaseReference
+                              .child('FoodForwardDatabase')
+                              .child('role');*/
+                          /*
+                          dbRef = FirebaseDatabase.instance.ref();
+                          final snapshot = await dbRef
+                              .child('FoodForwardDatabase')
+                              .child('role')
+                              .get();
+                          if (snapshot.exists) {
+                            print(snapshot.value);
+                          } else {
+                            print('no data available');
+                          }
+                            */
+                          /*  
+                          dbRef.onValue.listen((DataSnapshot datasnapshot)  {
+                            if (datasnapshot.value != null) {
+                              role = datasnapshot.value.toString();
+                              switch (role) {
+                                case 'hotel':
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ngo_screen(),
+                                      ));
+                                  break;
+                                case 'ngo':
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const hotel_screen()));
+                                  break;
+                              }
+                            } else {
+                              print('Data is null.');
+                            }
+                          } as FutureOr Function(DatabaseEvent)); */
+
+                          // firestore pull-data
+
+                          roleCollection
+                              .get()
+                              .then((QuerySnapshot querySnapshot) => {
+                                    querySnapshot.docs.forEach((doc) {
+                                      print(doc.data()); // this will all data available in the collection
+                                      
+
+                                      // the above code will pull data from firestore
+                                      // below code is to to pull role which is associated with the email
+                                      String emailToSearch =
+                                          'hotel12@gmail.com'; /* replace with the email - to retrive role associate with the email is
+                                          hard-coed right now but we want it dynamic for hard-coded it works fine */
+
+                                      roleCollection
+                                          .where('email',
+                                              isEqualTo: emailToSearch)
+                                          .get()
+                                          .then((QuerySnapshot querySnapshot) {
+                                        if (querySnapshot.size > 0) {
+                                          // Assuming there is only one matching document, we access the first document in the querySnapshot
+                                          String role =
+                                              querySnapshot.docs[0].get('role');
+                                          print(
+                                              'Role for email $emailToSearch: $role');
+                                        } else {
+                                          print(
+                                              'No role found for email $emailToSearch');
+                                        }
+                                      }).catchError((error) => print(
+                                              'Failed to search roles: $error'));
+                                    })
+                                  })
+                              .catchError((error) =>
+                                  print('Failed to get organizations: $error'));
+                          /*
+                          roleCollection
+                              .get()
+                              .then((QuerySnapshot querySnapshot) {
+                            for (QueryDocumentSnapshot documentSnapshot
+                                in querySnapshot.docs) {
+                              String email = documentSnapshot.get('email');
+                              String role = documentSnapshot.get('role');
+                              print('Email: $email');
+                              print('Role: $role');
+
+                              // condition
+                              if (role == 'hotel') {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const ngo_screen(),
+                                    ));
+                              } else if (role == 'NGO') {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const hotel_screen()));
+                              }
+                            }
+                          }).catchError((error) =>
+                                  print('Failed to get organizations: $error')); */
+/*
+                          if (role == 'hotel') {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const ngo_screen(),
+                                ));
+                          } else if (role == 'NGO') {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const hotel_screen()));
+                          }*/
+                          /*
+                          Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const hotel_screen()),
-                          );
-
-                      } ).onError((error, stackTrace) {
+                          );*/
+                        }).onError((error, stackTrace) {
                           print("Error ${error.toString()}");
                         });
                       },
@@ -90,17 +246,11 @@ class _log_inState extends State<log_in> {
                     style: TextButton.styleFrom(
                       backgroundColor: Colors.black,
                     ),
-                    onPressed: () {
-                     
-                       
-                    },
+                    onPressed: () {},
                     child: const Text("Dont Have Account\n            Sign In"),
                   ),
                 ),
-                 
-               
               ]),
-        )
-    );
+        ));
   }
 }
