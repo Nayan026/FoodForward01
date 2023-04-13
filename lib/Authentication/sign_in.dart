@@ -7,7 +7,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 
 import 'demo.dart';
 
-import 'package:flutter_application_1/home_screen.dart';
+
 import 'package:flutter_application_1/ngo_screen.dart';
 
 import 'package:flutter_application_1/hotel_screen.dart';
@@ -42,15 +42,14 @@ class _sign_inState extends State<sign_in> {
         builder: (BuildContext context) {
           return AlertDialog(
             title:
-                new Text('Sorry, You have Reached the Maximum input limit...'),
+                const Text('Sorry, You have Reached the Maximum input limit...'),
             actions: <Widget>[
-              Container(
-                  child: ElevatedButton(
-                child: Text("Ok"),
+              ElevatedButton(
+                child: const Text("Ok"),
                 onPressed: () {
-                  Navigator.of(context).pop();
+              Navigator.of(context).pop();
                 },
-              )),
+              ),
             ],
           );
         },
@@ -172,6 +171,7 @@ class _sign_inState extends State<sign_in> {
                   padding: const EdgeInsets.all(10),
                   // ignore: unnecessary_new
                   child: TextField(
+                    controller: contactNoController,
                     decoration:
                         const InputDecoration(labelText: "Enter your number"),
                     keyboardType: TextInputType.number,
@@ -233,7 +233,7 @@ class _sign_inState extends State<sign_in> {
                   alignment: Alignment.center, //Already Have Account
                   child: TextButton(
                     style: TextButton.styleFrom(
-                      primary: Colors.black,
+                      backgroundColor: Colors.black,
                     ),
                     onPressed: () {
                       Navigator.push(
