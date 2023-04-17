@@ -62,12 +62,17 @@ class _sign_inState extends State<sign_in> {
   // for firestore database
   late CollectionReference roleCollection;
 
+  late CollectionReference FoodForwardDatabase;
+
   @override
   void initState() {
     super.initState();
     dbRef = FirebaseDatabase.instance.ref().child('FoodForwardDatabase');
     // firestore
     roleCollection = FirebaseFirestore.instance.collection('Roles');
+
+    FoodForwardDatabase =
+        FirebaseFirestore.instance.collection('FoodForwardDatabase');
   }
 
   @override
@@ -205,14 +210,24 @@ class _sign_inState extends State<sign_in> {
                           'role': role.toString()
                         };
                         dbRef.push().set(database);
-                        
+
                         // firestore
                         Map<String, dynamic> roleDatabase = {
                           'email': emailController.text,
                           'role': role.toString()
                         };
-
                         roleCollection.add(roleDatabase);
+
+                        Map<String, dynamic> appDatabase = {
+                          'name of organization':
+                              nameofOrganizationController.text,
+                          'email': emailController.text,
+                          'password': passwordController.text,
+                          'address': addressController.text,
+                          'contactNo': contactNoController.text,
+                          'role': role.toString()
+                        };
+                        FoodForwardDatabase.add(appDatabase);
 
                         FirebaseAuth.instance
                             .createUserWithEmailAndPassword(
