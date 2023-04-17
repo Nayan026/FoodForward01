@@ -6,12 +6,6 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'demo.dart';
-<<<<<<< HEAD
-
-
-=======
-import 'package:flutter_application_1/home_screen.dart';
->>>>>>> 3c2794708fd092e120f2a1e10eff2a415701de02
 import 'package:flutter_application_1/ngo_screen.dart';
 import 'package:flutter_application_1/hotel_screen.dart';
 
