@@ -1,4 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
+//previous sign in page for ref
+
+/*import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,8 +8,12 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'demo.dart';
+import 'package:flutter_application_1/home_screen.dart';
 import 'package:flutter_application_1/ngo_screen.dart';
 import 'package:flutter_application_1/hotel_screen.dart';
+import 'contacts.dart';
+
+
 
 class sign_in extends StatefulWidget {
   sign_in({super.key});
@@ -18,6 +24,8 @@ class sign_in extends StatefulWidget {
 
 class _sign_inState extends State<sign_in> {
   String? role;
+
+
   //
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -38,15 +46,16 @@ class _sign_inState extends State<sign_in> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text(
-                'Sorry, You have Reached the Maximum input limit...'),
+            title:
+                const Text('Sorry, You have Reached the Maximum input limit...'),
             actions: <Widget>[
-              ElevatedButton(
-                child: const Text("Ok"),
+              Container(
+                  child: ElevatedButton(
+                child: Text("Ok"),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-              ),
+              )),
             ],
           );
         },
@@ -61,7 +70,6 @@ class _sign_inState extends State<sign_in> {
   late CollectionReference roleCollection;
 
   late CollectionReference FoodForwardDatabase;
-  late CollectionReference ngoCollection;
 
   @override
   void initState() {
@@ -69,8 +77,6 @@ class _sign_inState extends State<sign_in> {
     dbRef = FirebaseDatabase.instance.ref().child('FoodForwardDatabase');
     // firestore
     roleCollection = FirebaseFirestore.instance.collection('Roles');
-
-    ngoCollection = FirebaseFirestore.instance.collection('NGO');
 
     FoodForwardDatabase =
         FirebaseFirestore.instance.collection('FoodForwardDatabase');
@@ -196,6 +202,8 @@ class _sign_inState extends State<sign_in> {
                     alignment: Alignment.center,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
+                        
+
                         backgroundColor: const Color(0xFFe8772e),
                         elevation: 0,
                       ),
@@ -211,12 +219,13 @@ class _sign_inState extends State<sign_in> {
                           'role': role.toString()
                         };
                         dbRef.push().set(database);
-
+                        
                         // firestore
                         Map<String, dynamic> roleDatabase = {
                           'email': emailController.text,
                           'role': role.toString()
                         };
+
                         roleCollection.add(roleDatabase);
 
                         Map<String, dynamic> appDatabase = {
@@ -230,16 +239,6 @@ class _sign_inState extends State<sign_in> {
                         };
                         FoodForwardDatabase.add(appDatabase);
 
-                        Map<String, dynamic> ngoDatabase = {
-                          'name of organization':
-                              nameofOrganizationController.text,
-                          'email': emailController.text,
-                          'password': passwordController.text,
-                          'address': addressController.text,
-                          'contactNo': contactNoController.text,
-                        };
-                        ngoCollection.add(ngoDatabase);
-
                         FirebaseAuth.instance
                             .createUserWithEmailAndPassword(
                                 email: emailController.text,
@@ -250,13 +249,13 @@ class _sign_inState extends State<sign_in> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const ngo_screen()),
+                                  builder: (context) =>  ItemList()),
                             );
                           } else if (role == 'NGO') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const hotel_screen()),
+                                  builder: (context) => ItemList()),
                             );
                           }
                         }).onError((error, stackTrace) {
@@ -270,7 +269,7 @@ class _sign_inState extends State<sign_in> {
                   alignment: Alignment.center, //Already Have Account
                   child: TextButton(
                     style: TextButton.styleFrom(
-                      backgroundColor: Colors.black,
+                      primary: Colors.black,
                     ),
                     onPressed: () {
                       Navigator.push(
@@ -285,4 +284,4 @@ class _sign_inState extends State<sign_in> {
               ]),
         ));
   }
-}
+}*/

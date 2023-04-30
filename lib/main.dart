@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_application_1/users.dart';
 import 'Splash/logo_screen.dart';
+import 'users.dart';
+import 'Authentication/contacts.dart';
+
+
 
 void main() async{                                //Main Function Added
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    initialRoute: 'logo_screen',
-    routes:{
-      'logo_screen':(context) =>logo_screen()
-    }
+   home: logo_screen(),
   ));
 }
 
