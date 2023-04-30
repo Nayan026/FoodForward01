@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -49,7 +51,7 @@ class _ngo_screenState extends State<ngo_screen> {
             backgroundColor: Color(0xFFe8772e), title: Text("Food Forward")),
         backgroundColor: Colors.white,
         body: Container(
-          padding: EdgeInsets.all(16.0),
+           padding: EdgeInsets.all(16.0),
           child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: Column(

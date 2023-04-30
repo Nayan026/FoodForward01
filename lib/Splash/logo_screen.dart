@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_application_1/Splash/splash1.dart';
 
+// ignore: camel_case_types
 class logo_screen extends StatelessWidget {                //Logo Screen Class 
   const logo_screen({super.key});
 
@@ -19,17 +20,16 @@ class logo_screen extends StatelessWidget {                //Logo Screen Class
           
             Container(
                alignment: Alignment.center,
-            child: ElevatedButton( child: Text("Next"),         //Elevated Button Integrated 
-          style: ElevatedButton.styleFrom(
-            primary:Color (0xFFe8772e),
+            child: ElevatedButton( style: ElevatedButton.styleFrom(
+            backgroundColor:const Color (0xFFe8772e),
             elevation: 0,),
              onPressed: () {
                Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => splash1()),
+                                builder: (context) => const splash1()),
                           );
-             },)
+             }, child: const Text("Next"),)
             )
           ]),
     );

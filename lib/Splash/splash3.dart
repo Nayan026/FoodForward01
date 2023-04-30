@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
-
-
-import 'package:flutter_application_1/Authentication/sign_in.dart';
+import 'package:flutter_application_1/Authentication/who.dart';
 
 class splash3 extends StatefulWidget {
   const splash3({super.key});
@@ -36,7 +34,7 @@ class _splash3State extends State<splash3> {
              Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>  sign_in()),
+                                builder: (context) =>  who()),
                           );
           },
         ),
@@ -74,7 +72,7 @@ class _splash3State extends State<splash3> {
               Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => sign_in()),
+                                builder: (context) => who()),
                           );
              },)
           )

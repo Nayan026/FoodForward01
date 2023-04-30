@@ -1,4 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
+//previous sign in page for ref
+
+/*import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,14 +8,12 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'demo.dart';
-<<<<<<< HEAD
-
-
-=======
 import 'package:flutter_application_1/home_screen.dart';
->>>>>>> 3c2794708fd092e120f2a1e10eff2a415701de02
 import 'package:flutter_application_1/ngo_screen.dart';
 import 'package:flutter_application_1/hotel_screen.dart';
+import 'contacts.dart';
+
+
 
 class sign_in extends StatefulWidget {
   sign_in({super.key});
@@ -24,6 +24,8 @@ class sign_in extends StatefulWidget {
 
 class _sign_inState extends State<sign_in> {
   String? role;
+
+
   //
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -45,14 +47,15 @@ class _sign_inState extends State<sign_in> {
         builder: (BuildContext context) {
           return AlertDialog(
             title:
-                const Text('Sorry, You have Reached the Maximum input limit...'),
+                new Text('Sorry, You have Reached the Maximum input limit...'),
             actions: <Widget>[
-              ElevatedButton(
-                child: const Text("Ok"),
+              Container(
+                  child: ElevatedButton(
+                child: Text("Ok"),
                 onPressed: () {
-              Navigator.of(context).pop();
+                  Navigator.of(context).pop();
                 },
-              ),
+              )),
             ],
           );
         },
@@ -65,6 +68,7 @@ class _sign_inState extends State<sign_in> {
 
   // for firestore database
   late CollectionReference roleCollection;
+  late CollectionReference userdata;
 
   @override
   void initState() {
@@ -72,6 +76,7 @@ class _sign_inState extends State<sign_in> {
     dbRef = FirebaseDatabase.instance.ref().child('FoodForwardDatabase');
     // firestore
     roleCollection = FirebaseFirestore.instance.collection('Roles');
+    userdata = FirebaseFirestore.instance.collection('users');
   }
 
   @override
@@ -194,6 +199,8 @@ class _sign_inState extends State<sign_in> {
                     alignment: Alignment.center,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
+                        
+
                         backgroundColor: const Color(0xFFe8772e),
                         elevation: 0,
                       ),
@@ -209,14 +216,22 @@ class _sign_inState extends State<sign_in> {
                           'role': role.toString()
                         };
                         dbRef.push().set(database);
-                        
-                        // firestore
+
+                        /* // firestore
                         Map<String, dynamic> roleDatabase = {
                           'email': emailController.text,
                           'role': role.toString()
                         };
 
-                        roleCollection.add(roleDatabase);
+                        roleCollection.add(roleDatabase);*/
+
+                        Map<String, dynamic> info = {
+                          'Adddress': addressController.text,
+                          'Name': nameofOrganizationController.text,
+                          'role': role.toString()
+                        };
+
+                        userdata.add(info);
 
                         FirebaseAuth.instance
                             .createUserWithEmailAndPassword(
@@ -228,13 +243,13 @@ class _sign_inState extends State<sign_in> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const ngo_screen()),
+                                  builder: (context) =>  ItemList()),
                             );
                           } else if (role == 'NGO') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const hotel_screen()),
+                                  builder: (context) => ItemList()),
                             );
                           }
                         }).onError((error, stackTrace) {
@@ -248,7 +263,7 @@ class _sign_inState extends State<sign_in> {
                   alignment: Alignment.center, //Already Have Account
                   child: TextButton(
                     style: TextButton.styleFrom(
-                      backgroundColor: Colors.black,
+                      primary: Colors.black,
                     ),
                     onPressed: () {
                       Navigator.push(
@@ -263,4 +278,4 @@ class _sign_inState extends State<sign_in> {
               ]),
         ));
   }
-}
+}*/

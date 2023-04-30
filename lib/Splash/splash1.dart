@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'splash2.dart';
 import 'package:flutter_application_1/Authentication/sign_in.dart';
+import 'package:flutter_application_1/Authentication/who.dart';
 
 
 class splash1 extends StatefulWidget {
@@ -34,7 +35,7 @@ class _splash1State extends State<splash1> {
              Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>  sign_in()),
+                                builder: (context) =>  who()),
                           );
 
 

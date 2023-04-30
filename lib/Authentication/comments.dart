@@ -1,29 +1,4 @@
-//This is our previous log in page 
-
-/*import 'dart:async';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_application_1/hotel_screen.dart';
-import 'package:flutter_application_1/home_screen.dart';
-import 'package:flutter_application_1/Authentication/sign_in.dart';
-import 'package:flutter_application_1/ngo_screen.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-class log_in extends StatefulWidget {
-  const log_in({super.key});
-
-  @override
-  State<log_in> createState() => _log_inState();
-}
-
-class _log_inState extends State<log_in> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  String? role;
-  String? email;
-  Object? emailToSearch;
-/*
+ /*
   void role_info() {
     String role;
     final databaseReference = FirebaseDatabase.instance.ref();
@@ -40,74 +15,38 @@ class _log_inState extends State<log_in> {
         } as FutureOr Function(DatabaseEvent));
   }*/
 
-  // for firestore database
-  late CollectionReference roleCollection;
-  late DatabaseReference dbRef;
-  @override
-  void initState() {
-    super.initState();
-    // real-time database
-    dbRef = FirebaseDatabase.instance.ref().child('FoodForwardDatabase');
-    // firestore
-    roleCollection = FirebaseFirestore.instance.collection('Roles');
-  }
+/* 
+final FirebaseAuth auth = FirebaseAuth.instance;
+final DatabaseReference dbRef = FirebaseDatabase.instance.reference();
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Color(0xFFf9f8f7),
-        body: SingleChildScrollView(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                const SizedBox(
-                  height: 50,
-                ),
-                Container(
-                    alignment: Alignment.center,
-                    child: const Text(
-                      'Log In',
-                      textScaleFactor: 2.0,
-                      style: TextStyle(color: Colors.brown, fontSize: 15.0),
-                    )),
-                const SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  child: TextField(
-                    controller: emailController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Email',
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  child: TextField(
-                    controller: passwordController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Password',
-                    ),
-                  ),
-                ),
-                Container(
-                    alignment: Alignment.center,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFe8772e),
-                        elevation: 0,
-                      ),
-                      onPressed: () {
-                        FirebaseAuth.instance
-                            .signInWithEmailAndPassword(
-                                email: emailController.text,
-                                password: passwordController.text)
-                            .then((value) async {
-                          /*
+Future<void> checkUserRoleAndRoute() async {
+  final User user = auth.currentUser;
+ final DataSnapshot snapshot = await FirebaseDatabase.instance
+    .reference()
+    .child('users')
+    .orderByChild('email')
+    .equalTo(email)
+    .once();
+
+if (snapshot.value != null) {
+  final Map<dynamic, dynamic> userData = snapshot.value;
+  final String role = userData[email]['role'] as String;
+  // Route user based on their role
+}
+
+
+  if (role == 'admin') {
+    // Navigate to admin dashboard screen
+    Navigator.pushReplacementNamed(context, '/admin-dashboard');
+  } else {
+    // Navigate to main app screen
+    Navigator.pushReplacementNamed(context, '/app-screen');
+  }
+}
+
+*/
+ 
+                        /*
                           final databaseReference =
                               FirebaseDatabase.instance.ref();
                           final dataReference = databaseReference
@@ -153,12 +92,12 @@ class _log_inState extends State<log_in> {
 
                           // firestore pull-data
 
-                          roleCollection
+                       /*   roleCollection
                               .get()
                               .then((QuerySnapshot querySnapshot) => {
                                     querySnapshot.docs.forEach((doc) {
-                                      print(doc
-                                          .data()); // this will all data available in the collection
+                                      print(doc.data()); // this will all data available in the collection
+                                      
 
                                       // the above code will pull data from firestore
                                       // below code is to to pull role which is associated with the email
@@ -215,7 +154,7 @@ class _log_inState extends State<log_in> {
                             }
                           }).catchError((error) =>
                                   print('Failed to get organizations: $error')); */
-/*
+
                           if (role == 'hotel') {
                             Navigator.push(
                                 context,
@@ -235,25 +174,3 @@ class _log_inState extends State<log_in> {
                             MaterialPageRoute(
                                 builder: (context) => const hotel_screen()),
                           );*/
-                        }).onError((error, stackTrace) {
-                          print("Error ${error.toString()}");
-                        });
-                      },
-                      child: const Text("Log In"),
-                    )),
-                Container(
-                  //skip icon
-                  alignment: Alignment.center,
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      backgroundColor: Colors.black,
-                    ),
-                    onPressed: () {},
-                    child: const Text("Dont Have Account\n            Sign In"),
-                  ),
-                ),
-              ]),
-        ));
-  }
-}
-*/
