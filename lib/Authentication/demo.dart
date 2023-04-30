@@ -9,6 +9,7 @@ import 'package:flutter_application_1/home_screen.dart';
 import 'package:flutter_application_1/Authentication/sign_in.dart';
 import 'package:flutter_application_1/ngo_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class log_in extends StatefulWidget {
   const log_in({super.key});
@@ -43,6 +44,7 @@ class _log_inState extends State<log_in> {
   // for firestore database
   late CollectionReference roleCollection;
   late DatabaseReference dbRef;
+  late CollectionReference foodForwardDatabase;
   @override
   void initState() {
     super.initState();
@@ -50,6 +52,8 @@ class _log_inState extends State<log_in> {
     dbRef = FirebaseDatabase.instance.ref().child('FoodForwardDatabase');
     // firestore
     roleCollection = FirebaseFirestore.instance.collection('Roles');
+    foodForwardDatabase =
+        FirebaseFirestore.instance.collection('FoodForwardDatabase');
   }
 
   @override
@@ -152,7 +156,7 @@ class _log_inState extends State<log_in> {
                           } as FutureOr Function(DatabaseEvent)); */
 
                           // firestore pull-data
-
+                          /*
                           roleCollection
                               .get()
                               .then((QuerySnapshot querySnapshot) => {
@@ -186,7 +190,51 @@ class _log_inState extends State<log_in> {
                                     })
                                   })
                               .catchError((error) =>
+                                  print('Failed to get organizations: $error')); */
+
+                          // firestore database data pull trails
+                          // of single document
+                          foodForwardDatabase
+                              .get()
+                              .then((QuerySnapshot querySnapshot) {
+                            for (QueryDocumentSnapshot documentSnapshot
+                                in querySnapshot.docs) {
+                              String address = documentSnapshot.get('address');
+                              String contactNo =
+                                  documentSnapshot.get('contactNo');
+                              String email = documentSnapshot.get('email');
+                              String nameOfOrganization =
+                                  documentSnapshot.get('name of organization');
+                              String password =
+                                  documentSnapshot.get('password');
+                              String role = documentSnapshot.get('role');
+                              print('address: $address');
+                              print('contactNo: $contactNo');
+                              print('Email: $email');
+                              print('nameoforganization: $nameOfOrganization');
+                              print('password: $password');
+                              print('role: $role');
+                            }
+                          }).catchError((error) =>
                                   print('Failed to get organizations: $error'));
+
+                          // realtime database all data pull trails
+                          /*
+                          dbRef
+                              .child('FoodForwardDatabase')
+                              .once()
+                              .then((DataSnapshot snapshot) {
+                                if (snapshot.value != null) {
+                                  Object? data = snapshot.value;
+                                  print(data);
+                                } else {
+                                  print('data is null');
+                                }
+                              } as FutureOr Function(DatabaseEvent value))
+                              .catchError((error) {
+                            print('Error: $error');
+                          }); */
+
                           /*
                           roleCollection
                               .get()

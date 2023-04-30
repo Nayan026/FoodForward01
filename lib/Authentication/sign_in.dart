@@ -8,7 +8,12 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'demo.dart';
+<<<<<<< HEAD
+
+
+=======
 import 'package:flutter_application_1/home_screen.dart';
+>>>>>>> 3c2794708fd092e120f2a1e10eff2a415701de02
 import 'package:flutter_application_1/ngo_screen.dart';
 import 'package:flutter_application_1/hotel_screen.dart';
 import 'contacts.dart';
@@ -68,7 +73,6 @@ class _sign_inState extends State<sign_in> {
 
   // for firestore database
   late CollectionReference roleCollection;
-  late CollectionReference userdata;
 
   @override
   void initState() {
@@ -76,7 +80,6 @@ class _sign_inState extends State<sign_in> {
     dbRef = FirebaseDatabase.instance.ref().child('FoodForwardDatabase');
     // firestore
     roleCollection = FirebaseFirestore.instance.collection('Roles');
-    userdata = FirebaseFirestore.instance.collection('users');
   }
 
   @override
@@ -216,22 +219,14 @@ class _sign_inState extends State<sign_in> {
                           'role': role.toString()
                         };
                         dbRef.push().set(database);
-
-                        /* // firestore
+                        
+                        // firestore
                         Map<String, dynamic> roleDatabase = {
                           'email': emailController.text,
                           'role': role.toString()
                         };
 
-                        roleCollection.add(roleDatabase);*/
-
-                        Map<String, dynamic> info = {
-                          'Adddress': addressController.text,
-                          'Name': nameofOrganizationController.text,
-                          'role': role.toString()
-                        };
-
-                        userdata.add(info);
+                        roleCollection.add(roleDatabase);
 
                         FirebaseAuth.instance
                             .createUserWithEmailAndPassword(
