@@ -4,7 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_application_1/users.dart';
 import 'Splash/logo_screen.dart';
 import 'users.dart';
-import 'Authentication/contacts.dart';
+import 'Authentication/contacts_hotel.dart';
 
 
 

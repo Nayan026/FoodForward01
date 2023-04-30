@@ -4,17 +4,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 
-class ItemList extends StatelessWidget {
-  ItemList({Key? key}) : super(key: key) {
-    _stream = _reference.snapshots();
+class ItemListn extends StatelessWidget {
+  ItemListn({Key? key}) : super(key: key) {
+    _stream1 = user_ngoCollection.snapshots();
   }
 
-  final CollectionReference _reference =
-      FirebaseFirestore.instance.collection('users');
+  final CollectionReference user_ngoCollection =
+      FirebaseFirestore.instance.collection('User-ngo');
 
   //_reference.get()  ---> returns Future<QuerySnapshot>
   //_reference.snapshots()--> Stream<QuerySnapshot> -- realtime updates
-  late Stream<QuerySnapshot> _stream;
+  late Stream<QuerySnapshot> _stream1;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class ItemList extends StatelessWidget {
         title: const Text("Food Forward"),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: _stream,
+        stream: _stream1,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           //Check error
           if (snapshot.hasError) {
@@ -40,7 +40,7 @@ class ItemList extends StatelessWidget {
             //Convert the documents to Maps
             List<Map> items = documents
                 .map((e) =>
-                    {'id': e.id, 'Adddress': e['Adddress'], 'Name': e['Name']})
+                    { 'address': e['address'], 'name of organization': e['name of organization']})
                 .toList();
 
             //Display the list
@@ -76,7 +76,7 @@ class ItemList extends StatelessWidget {
                                 height: 10,
                               ),
                               Text(
-                                'Org.Name: ${thisItem['Name']}',
+                                'Org.Name: ${thisItem['name of organization']}',
                                 style: const TextStyle(
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.bold,
@@ -86,7 +86,7 @@ class ItemList extends StatelessWidget {
                               const SizedBox(
                                 height: 10,
                               ),
-                              Text('Location: ${thisItem['Adddress']}'),
+                              Text('Location: ${thisItem['address']}'),
                               const SizedBox(
                                 height: 10,
                               ),

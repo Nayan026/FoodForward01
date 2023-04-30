@@ -4,19 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'hotel_login.dart';
 import 'who.dart';
+import 'contacts_hotel.dart';
+import 'package:flutter_application_1/Authentication/ngo_login.dart';
+import 'package:flutter_application_1/Authentication/ngo_sigin.dart';
+import 'contacts_ngo.dart';
 
-void main() => runApp(MaterialApp(
-      home: Hotel_Signin(),
-    ));
-
-class Hotel_Signin extends StatelessWidget {
-  final nameofOrganizationController = TextEditingController();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final addressController = TextEditingController();
-  final contactNoController = TextEditingController();
-
-  late final CollectionReference hotelCollection;
+class Hotel_Signin extends StatefulWidget {
+  Hotel_Signin({super.key});
+  /* late final CollectionReference hotelCollection;
   late final CollectionReference user_hotelCollection;
 
   Hotel_Signin({Key? key})
@@ -24,12 +19,23 @@ class Hotel_Signin extends StatelessWidget {
         user_hotelCollection =
             FirebaseFirestore.instance.collection('User-hotel'),
         super(key: key);
+*/
+  @override
+  State<Hotel_Signin> createState() => _Hotel_SigninState();
+}
 
-  void _onChanged(String value) {
-    // Do something when the value of the contact number field changes
-  }
+class _Hotel_SigninState extends State<Hotel_Signin> {
+  final nameofOrganizationController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final addressController = TextEditingController();
+  final contactNoController = TextEditingController();
 
+  late CollectionReference hotelCollection;
+  late CollectionReference user_hotelCollection;
+  @override
   void initState() {
+    super.initState();
     hotelCollection = FirebaseFirestore.instance.collection('Hotel');
     user_hotelCollection = FirebaseFirestore.instance.collection('User-hotel');
   }
@@ -108,7 +114,7 @@ class Hotel_Signin extends StatelessWidget {
                   decoration:
                       const InputDecoration(labelText: "Enter your number"),
                   keyboardType: TextInputType.number,
-                  onChanged: _onChanged,
+
                   maxLength: 10,
                   inputFormatters: <TextInputFormatter>[
                     FilteringTextInputFormatter.digitsOnly
@@ -136,6 +142,8 @@ class Hotel_Signin extends StatelessWidget {
                   FirebaseAuth.instance.createUserWithEmailAndPassword(
                       email: emailController.text,
                       password: passwordController.text);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ItemListn()));
                 },
                 child: Text('Sign in'),
                 style: ButtonStyle(
@@ -146,10 +154,7 @@ class Hotel_Signin extends StatelessWidget {
               ),
               SizedBox(height: 20),
               TextButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Hotel_Login()));
-                },
+                onPressed: () {},
                 child: Text(
                   'Already Have an Account?\n                Log In',
                   style: TextStyle(

@@ -1,36 +1,47 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'ngo_login.dart';
 import 'who.dart';
+import 'contacts_hotel.dart';
 
-void main() => runApp(MaterialApp(
-      home: NGO_Signin(),
-    ));
 
-class NGO_Signin extends StatelessWidget {
+
+class NGO_Signin extends StatefulWidget {
+   NGO_Signin({super.key});
+  //late final CollectionReference ngoCollection;
+  //ate final CollectionReference user_ngoCollection;
+
+ /* NGO_Signin({Key? key})
+      : ngoCollection = FirebaseFirestore.instance.collection('NGO'),
+        user_ngoCollection = FirebaseFirestore.instance.collection('User-ngo'),
+        super(key: key);
+*/
+  @override
+  State<NGO_Signin> createState() => _NGO_SigninState();
+}
+
+class _NGO_SigninState extends State<NGO_Signin> {
   final nameofOrganizationController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final addressController = TextEditingController();
   final contactNoController = TextEditingController();
-
-  late final CollectionReference ngoCollection;
-  late final CollectionReference user_ngoCollection;
-
-  NGO_Signin({Key? key})
-      : ngoCollection = FirebaseFirestore.instance.collection('NGO'),
-        user_ngoCollection = FirebaseFirestore.instance.collection('User-ngo'),
-        super(key: key);
-
-  void _onChanged(String value) {
-    // Do something when the value of the contact number field changes
-  }
+  
+  late CollectionReference ngoCollection;
+  late CollectionReference user_ngoCollection;
+ 
+  @override
 
   void initState() {
+    super.initState();
+    
     ngoCollection = FirebaseFirestore.instance.collection('NGO');
     user_ngoCollection = FirebaseFirestore.instance.collection('User-ngo');
+    
+    
   }
 
   @override
@@ -107,7 +118,7 @@ class NGO_Signin extends StatelessWidget {
                   decoration:
                       const InputDecoration(labelText: "Enter your number"),
                   keyboardType: TextInputType.number,
-                  onChanged: _onChanged,
+                  
                   maxLength: 10, // to check
                   inputFormatters: <TextInputFormatter>[
                     FilteringTextInputFormatter.digitsOnly
@@ -117,6 +128,7 @@ class NGO_Signin extends StatelessWidget {
               SizedBox(height: 40),
               ElevatedButton(
                 onPressed: () {
+                   
                   Map<String, dynamic> ngodatabase = {
                     'name of organization': nameofOrganizationController.text,
                     'email': emailController.text,
@@ -135,6 +147,8 @@ class NGO_Signin extends StatelessWidget {
                   FirebaseAuth.instance.createUserWithEmailAndPassword(
                       email: emailController.text,
                       password: passwordController.text);
+                  Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ItemList()));
                 },
                 child: Text('Sign in'),
                 style: ButtonStyle(
@@ -146,8 +160,6 @@ class NGO_Signin extends StatelessWidget {
               SizedBox(height: 20),
               TextButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => NGO_Login()));
                 },
                 child: Text(
                   'Already Have an Account?\n                Log In',
