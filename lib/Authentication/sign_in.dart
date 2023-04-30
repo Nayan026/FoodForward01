@@ -38,13 +38,13 @@ class _sign_inState extends State<sign_in> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title:
-                const Text('Sorry, You have Reached the Maximum input limit...'),
+            title: const Text(
+                'Sorry, You have Reached the Maximum input limit...'),
             actions: <Widget>[
               ElevatedButton(
                 child: const Text("Ok"),
                 onPressed: () {
-              Navigator.of(context).pop();
+                  Navigator.of(context).pop();
                 },
               ),
             ],
@@ -61,6 +61,7 @@ class _sign_inState extends State<sign_in> {
   late CollectionReference roleCollection;
 
   late CollectionReference FoodForwardDatabase;
+  late CollectionReference ngoCollection;
 
   @override
   void initState() {
@@ -68,6 +69,8 @@ class _sign_inState extends State<sign_in> {
     dbRef = FirebaseDatabase.instance.ref().child('FoodForwardDatabase');
     // firestore
     roleCollection = FirebaseFirestore.instance.collection('Roles');
+
+    ngoCollection = FirebaseFirestore.instance.collection('NGO');
 
     FoodForwardDatabase =
         FirebaseFirestore.instance.collection('FoodForwardDatabase');
@@ -226,6 +229,16 @@ class _sign_inState extends State<sign_in> {
                           'role': role.toString()
                         };
                         FoodForwardDatabase.add(appDatabase);
+
+                        Map<String, dynamic> ngoDatabase = {
+                          'name of organization':
+                              nameofOrganizationController.text,
+                          'email': emailController.text,
+                          'password': passwordController.text,
+                          'address': addressController.text,
+                          'contactNo': contactNoController.text,
+                        };
+                        ngoCollection.add(ngoDatabase);
 
                         FirebaseAuth.instance
                             .createUserWithEmailAndPassword(
