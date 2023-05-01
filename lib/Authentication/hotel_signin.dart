@@ -10,7 +10,6 @@ import 'package:flutter_application_1/Authentication/ngo_login.dart';
 import 'package:flutter_application_1/Authentication/ngo_sigin.dart';
 import 'contacts_ngo.dart';
 
-
 class Hotel_Signin extends StatefulWidget {
   Hotel_Signin({super.key});
   /* late final CollectionReference hotelCollection;
@@ -156,7 +155,10 @@ class _Hotel_SigninState extends State<Hotel_Signin> {
               ),
               SizedBox(height: 20),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Hotel_Login()));
+                },
                 child: Text(
                   'Already Have an Account?\n                Log In',
                   style: TextStyle(

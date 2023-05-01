@@ -7,14 +7,12 @@ import 'ngo_login.dart';
 import 'who.dart';
 import 'contacts_hotel.dart';
 
-
-
 class NGO_Signin extends StatefulWidget {
-   NGO_Signin({super.key});
+  NGO_Signin({super.key});
   //late final CollectionReference ngoCollection;
   //ate final CollectionReference user_ngoCollection;
 
- /* NGO_Signin({Key? key})
+  /* NGO_Signin({Key? key})
       : ngoCollection = FirebaseFirestore.instance.collection('NGO'),
         user_ngoCollection = FirebaseFirestore.instance.collection('User-ngo'),
         super(key: key);
@@ -29,19 +27,16 @@ class _NGO_SigninState extends State<NGO_Signin> {
   final passwordController = TextEditingController();
   final addressController = TextEditingController();
   final contactNoController = TextEditingController();
-  
+
   late CollectionReference ngoCollection;
   late CollectionReference user_ngoCollection;
- 
-  @override
 
+  @override
   void initState() {
     super.initState();
-    
+
     ngoCollection = FirebaseFirestore.instance.collection('NGO');
     user_ngoCollection = FirebaseFirestore.instance.collection('User-ngo');
-    
-    
   }
 
   @override
@@ -118,7 +113,7 @@ class _NGO_SigninState extends State<NGO_Signin> {
                   decoration:
                       const InputDecoration(labelText: "Enter your number"),
                   keyboardType: TextInputType.number,
-                  
+
                   maxLength: 10, // to check
                   inputFormatters: <TextInputFormatter>[
                     FilteringTextInputFormatter.digitsOnly
@@ -128,7 +123,6 @@ class _NGO_SigninState extends State<NGO_Signin> {
               SizedBox(height: 40),
               ElevatedButton(
                 onPressed: () {
-                   
                   Map<String, dynamic> ngodatabase = {
                     'name of organization': nameofOrganizationController.text,
                     'email': emailController.text,
@@ -148,7 +142,7 @@ class _NGO_SigninState extends State<NGO_Signin> {
                       email: emailController.text,
                       password: passwordController.text);
                   Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ItemList()));
+                      MaterialPageRoute(builder: (context) => ItemList()));
                 },
                 child: Text('Sign in'),
                 style: ButtonStyle(
@@ -160,6 +154,8 @@ class _NGO_SigninState extends State<NGO_Signin> {
               SizedBox(height: 20),
               TextButton(
                 onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => NGO_Login()));
                 },
                 child: Text(
                   'Already Have an Account?\n                Log In',
