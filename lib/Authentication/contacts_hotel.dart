@@ -1,6 +1,9 @@
 //this page contains the fetched data from firebase of signed in users
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_application_1/nav-drawer.dart';
+import 'package:flutter_application_1/Authentication/upload.dart';
+import 'package:flutter_application_1/Authentication/show.dart';
 
 
 
@@ -9,16 +12,19 @@ class ItemList extends StatelessWidget {
     _stream = user_hotelCollection.snapshots();
   }
 
+
   final CollectionReference user_hotelCollection =
       FirebaseFirestore.instance.collection('User-hotel');
 
   //_reference.get()  ---> returns Future<QuerySnapshot>
   //_reference.snapshots()--> Stream<QuerySnapshot> -- realtime updates
   late Stream<QuerySnapshot> _stream;
+  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      endDrawer: NavDrawer(),
       appBar: AppBar(
         backgroundColor: Color(0xFFe8772e),
         title: const Text("Food Forward"),
@@ -58,7 +64,7 @@ class ItemList extends StatelessWidget {
                       child: Container(
                         padding: EdgeInsets.all(1.0),
                         width: 300.0,
-                        height: 250.0,
+                        height: 300.0,
                         child: ListTile(
                           tileColor: Color(0xFFf9f7f8),
                           title: Column(
@@ -96,7 +102,21 @@ class ItemList extends StatelessWidget {
                                   backgroundColor: const Color(0xFFe8772e),
                                   elevation: 0,
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                   Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => UploadScreen()));
+                                },
+                              ),
+                               ElevatedButton(
+                                child: Text("Show images"),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xFFe8772e),
+                                  elevation: 0,
+                                ),
+                                onPressed: () {
+                                   Navigator.push(context,
+                      MaterialPageRoute(builder: (context) =>  ImageListScreen()));
+                                },
                               ),
                             ],
                           ),

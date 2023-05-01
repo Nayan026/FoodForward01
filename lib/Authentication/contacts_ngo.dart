@@ -1,7 +1,7 @@
 //this page contains the fetched data from firebase of signed in users
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:flutter_application_1/nav-drawer.dart';
 
 
 class ItemListn extends StatelessWidget {
@@ -19,9 +19,11 @@ class ItemListn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      endDrawer: NavDrawer(),
       appBar: AppBar(
         backgroundColor: Color(0xFFe8772e),
         title: const Text("Food Forward"),
+
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: _stream1,
