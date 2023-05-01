@@ -1,9 +1,10 @@
 //this page contains the fetched data from firebase of signed in users
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_application_1/Authentication/image.dart';
 import 'package:flutter_application_1/nav-drawer.dart';
 import 'package:flutter_application_1/Authentication/upload.dart';
-import 'package:flutter_application_1/Authentication/show.dart';
+
 
 
 
