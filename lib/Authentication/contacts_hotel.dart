@@ -1,18 +1,14 @@
 //this page contains the fetched data from firebase of signed in users
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_application_1/Authentication/image.dart';
 import 'package:flutter_application_1/nav-drawer.dart';
 import 'package:flutter_application_1/Authentication/upload.dart';
-
-
-
+import 'package:firebase_storage/firebase_storage.dart';
 
 class ItemList extends StatelessWidget {
   ItemList({Key? key}) : super(key: key) {
     _stream = user_hotelCollection.snapshots();
   }
-
 
   final CollectionReference user_hotelCollection =
       FirebaseFirestore.instance.collection('User-hotel');
@@ -20,7 +16,6 @@ class ItemList extends StatelessWidget {
   //_reference.get()  ---> returns Future<QuerySnapshot>
   //_reference.snapshots()--> Stream<QuerySnapshot> -- realtime updates
   late Stream<QuerySnapshot> _stream;
-  
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +41,10 @@ class ItemList extends StatelessWidget {
 
             //Convert the documents to Maps
             List<Map> items = documents
-                .map((e) =>
-                    { 'address': e['address'], 'name of organization': e['name of organization']})
+                .map((e) => {
+                      'address': e['address'],
+                      'name of organization': e['name of organization']
+                    })
                 .toList();
 
             //Display the list
@@ -104,19 +101,25 @@ class ItemList extends StatelessWidget {
                                   elevation: 0,
                                 ),
                                 onPressed: () {
-                                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => UploadScreen()));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              UploadScreen()));
                                 },
                               ),
-                               ElevatedButton(
+                              ElevatedButton(
                                 child: Text("Show images"),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color(0xFFe8772e),
                                   elevation: 0,
                                 ),
                                 onPressed: () {
-                                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) =>  ImageListScreen()));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ImageListScreen()));
                                 },
                               ),
                             ],
