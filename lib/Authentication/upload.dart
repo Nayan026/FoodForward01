@@ -5,8 +5,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 
-class UploadScreen extends StatefulWidget {
-  @override
+class UploadScreen extends StatefulWidget {                       //Integration of Image UploadScreen 
+  @override    
   _UploadScreenState createState() => _UploadScreenState();
 }
 
