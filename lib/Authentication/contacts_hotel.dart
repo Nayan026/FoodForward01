@@ -1,9 +1,12 @@
 //this page contains the fetched data from firebase of signed in users
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_application_1/nav-drawer.dart';
 import 'package:flutter_application_1/Authentication/upload.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter_application_1/Authentication/image.dart';
+import 'contactus_hotel.dart';
 
 class ItemList extends StatelessWidget {
   ItemList({Key? key}) : super(key: key) {
@@ -80,7 +83,7 @@ class ItemList extends StatelessWidget {
                                 height: 10,
                               ),
                               Text(
-                                'Org.Name: ${thisItem['name of organization']}',
+                                'Donor Name: ${thisItem['name of organization']}',
                                 style: const TextStyle(
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.bold,
@@ -100,12 +103,12 @@ class ItemList extends StatelessWidget {
                                   backgroundColor: const Color(0xFFe8772e),
                                   elevation: 0,
                                 ),
-                                onPressed: () {
+                                onPressed: ()  {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              UploadScreen()));
+                                              phoneNumber()));
                                 },
                               ),
                               ElevatedButton(

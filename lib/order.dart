@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'thank_you.dart';
 import 'no_ans.dart';
@@ -5,10 +6,14 @@ import 'no_ans.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 class MyWidget extends StatelessWidget {
-  const MyWidget({super.key});
+  const MyWidget({Key? key}) : super(key: key);
+
+
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
+    final phoneNumber = user?.phoneNumber;
     return Scaffold(
       backgroundColor: Color(0xFFf9f8f7),
       body: Column(
@@ -48,7 +53,7 @@ class MyWidget extends StatelessWidget {
                 ),
                 SizedBox(width: 8.0),
                 Text(
-                  '+91-9313696799',
+                   phoneNumber ?? '',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 20.0,

@@ -34,11 +34,13 @@ class _Hotel_SigninState extends State<Hotel_Signin> {
 
   late CollectionReference hotelCollection;
   late CollectionReference user_hotelCollection;
+  late CollectionReference contactNoCollection;
   @override
   void initState() {
     super.initState();
     hotelCollection = FirebaseFirestore.instance.collection('Hotel');
     user_hotelCollection = FirebaseFirestore.instance.collection('User-hotel');
+    contactNoCollection=FirebaseFirestore.instance.collection('contactNo-hotel');
   }
 
   @override
@@ -139,6 +141,11 @@ class _Hotel_SigninState extends State<Hotel_Signin> {
                     'address': addressController.text,
                   };
                   user_hotelCollection.add(hotelCard);
+
+                  Map<String,dynamic>contactcard={
+                    'contactNo':contactNoController.text,
+                  };
+                  contactNoCollection.add(contactcard);
 
                   FirebaseAuth.instance.createUserWithEmailAndPassword(
                       email: emailController.text,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_application_1/questions.dart';
+import 'package:flutter_application_1/thank_you.dart';
 
 class thanks extends StatelessWidget {
   const thanks({super.key});
@@ -20,6 +22,12 @@ class thanks extends StatelessWidget {
       ),
       Container(
 child: TextButton(onPressed: () { 
+
+   Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              markme()));
 
  },
 child:Text('Make your effots count \n           Click here',)),
