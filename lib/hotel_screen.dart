@@ -53,7 +53,7 @@ class _hotel_screenState extends State<hotel_screen> {
           padding: EdgeInsets.all(16.0),
           child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
-              child: Column(
+              child: Column(                         //buildCard included for the required Details
                 children: [
                   buildCard('SukhSagar Hotel','Location :  Robert Robertson, 1234 NW Bobcat Lane, St. Robert.'),
                   buildCard('Zenith Youth Hostel','Location :  Robert Robertson, 1234 NW Bobcat Lane, St. Robert.'),
