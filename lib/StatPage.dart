@@ -17,6 +17,7 @@ class _StatPageState extends State<StatPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Statistics'),
+        backgroundColor: Color(0xFFe8772e),
       ),
       body: Container(
         padding: EdgeInsets.all(20),

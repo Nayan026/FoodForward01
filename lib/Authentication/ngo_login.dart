@@ -70,7 +70,10 @@ class NGO_Login extends StatelessWidget {
                       MaterialStateProperty.all<Color>(Colors.white)),
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => NGO_Signin()));
+              },
               child: Text(
                 'Don\'t Have an Account?\n                Sign In',
                 style: TextStyle(
