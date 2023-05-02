@@ -1,4 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Splash/logo_screen.dart';
+import 'package:flutter_application_1/StatPage.dart';
+import 'package:flutter_application_1/Splash/logo_screen.dart';
 
 class NavDrawer extends StatelessWidget {
   @override
@@ -28,7 +33,10 @@ class NavDrawer extends StatelessWidget {
               textScaleFactor: 2.0,
               style: TextStyle(color: Colors.brown, fontSize: 15.0),
             ),
-            onTap: () => {Navigator.of(context).pop()},
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => StatPage()));
+            },
           ),
           ListTile(
             leading: Icon(Icons.exit_to_app),
@@ -37,7 +45,11 @@ class NavDrawer extends StatelessWidget {
               textScaleFactor: 2.0,
               style: TextStyle(color: Colors.brown, fontSize: 15.0),
             ),
-            onTap: () => {Navigator.of(context).pop()},
+            onTap: () {
+              FirebaseAuth.instance.signOut();
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => logo_screen()));
+            },
           ),
         ],
       ),
