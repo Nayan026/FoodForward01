@@ -192,16 +192,11 @@ class _markmeState extends State<markme> {
                     onPrimary: Colors.white,
                   ),
                   onPressed: () {
-                   
-
-                     firestore
-                        .collection('Stat_info')
-                        .doc('statistics')
-                        .set({
-                          'question1': q1Val,
-                          'question2': q2Val,
-                          'question3': q3Val,
-                        }).then((value) => {});
+                    firestore.collection('Stat_info').doc('statistics').set({
+                      'question1': q1Val,
+                      'question2': q2Val,
+                      'question3': q3Val,
+                    }).then((value) => {});
 
                     firestore
                         .collection('users')
