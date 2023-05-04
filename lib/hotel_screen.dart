@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
-class hotel_screen extends StatefulWidget {
+class hotel_screen extends StatefulWidget {             //Hotel Screen Class
   const hotel_screen({super.key});
 
   @override
@@ -10,7 +10,7 @@ class hotel_screen extends StatefulWidget {
 }
 
 class _hotel_screenState extends State<hotel_screen> {
-  Card buildCard(var heading , var subheading) {
+  Card buildCard(var heading , var subheading) {             //Integration of Card with buildCard
     
     return Card(
         elevation: 4.0,
@@ -53,7 +53,7 @@ class _hotel_screenState extends State<hotel_screen> {
           padding: EdgeInsets.all(16.0),
           child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
-              child: Column(
+              child: Column(                         //buildCard included for the required Details
                 children: [
                   buildCard('SukhSagar Hotel','Location :  Robert Robertson, 1234 NW Bobcat Lane, St. Robert.'),
                   buildCard('Zenith Youth Hostel','Location :  Robert Robertson, 1234 NW Bobcat Lane, St. Robert.'),

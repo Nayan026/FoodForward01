@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class StatPage extends StatefulWidget {
@@ -8,9 +9,33 @@ class StatPage extends StatefulWidget {
 }
 
 class _StatPageState extends State<StatPage> {
-  int _peopleFed = 500;
-  double _foodWasteReduced = 35.5;
-  double _waterSaved = 12.0;
+  late Future<DocumentSnapshot> _documentSnapshotFuture;
+  double question1 = 0;
+  double question2 = 0;
+  double question3 = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchData();
+  }
+
+  void _fetchData() {
+    CollectionReference statCollection =
+        FirebaseFirestore.instance.collection('Stat_info');
+    DocumentReference statDocument = statCollection.doc('statistics');
+    _documentSnapshotFuture = statDocument.get();
+
+    _documentSnapshotFuture.then((DocumentSnapshot documentSnapshot) {
+      Map<String, dynamic> data =
+          documentSnapshot.data() as Map<String, dynamic>;
+      setState(() {
+        question1 = data['question1'] as double;
+        question2 = data['question2'] as double;
+        question3 = data['question3'] as double;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +79,7 @@ class _StatPageState extends State<StatPage> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Text(
-                              '$_peopleFed',
+                              '$question1',
                               textScaleFactor: 2.0,
                               style: TextStyle(
                                   color: Colors.black, fontSize: 50.0),
@@ -108,7 +133,7 @@ class _StatPageState extends State<StatPage> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Text(
-                              '$_foodWasteReduced',
+                              '$question2',
                               textScaleFactor: 2.0,
                               style: TextStyle(
                                   color: Colors.black, fontSize: 50.0),
@@ -163,7 +188,7 @@ class _StatPageState extends State<StatPage> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Text(
-                              '$_waterSaved',
+                              '$question3',
                               textScaleFactor: 2.0,
                               style: TextStyle(
                                   color: Colors.black, fontSize: 50.0),

@@ -24,7 +24,7 @@ class no_ans extends StatelessWidget {
 child:Text('Thank You !',style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),)
       ),
       Container(
-        child: TextButton(onPressed: () { 
+        child: TextButton(onPressed: () {
             Navigator.push(
                   context, MaterialPageRoute(builder: (context) => ItemList()));
  },

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 //import 'package:flutter/src/widgets/framework.dart';
 //import 'package:flutter/src/widgets/placeholder.dart';
-import 'hotel_login.dart';
-import 'hotel_signin.dart';
-import 'ngo_login.dart';
-import 'ngo_sigin.dart';
+import 'hotel_login.dart';               //Hotel Login
+import 'hotel_signin.dart';              //Hotel Signin
+import 'ngo_login.dart';                 //NGO Login
+import 'ngo_sigin.dart';                 //NGO Signin
 
 class who extends StatelessWidget {
   const who({super.key});

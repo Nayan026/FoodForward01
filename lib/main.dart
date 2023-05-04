@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_core/firebase_core.dart';                 //Integrated with Firebase
 import 'package:flutter_application_1/users.dart';
 import 'Splash/logo_screen.dart';
 import 'users.dart';

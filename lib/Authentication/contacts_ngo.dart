@@ -6,7 +6,7 @@ import 'package:flutter_application_1/nav-drawer.dart';
 
 class ItemListn extends StatelessWidget {
   ItemListn({Key? key}) : super(key: key) {
-    _stream1 = user_ngoCollection.snapshots();
+    _stream1 = user_ngoCollection.snapshots();              //Stream1 with NGOCollection
   }
 
   final CollectionReference user_ngoCollection =

@@ -40,8 +40,8 @@ class hotelhome extends StatelessWidget {
               width: 200,
               child: ElevatedButton(
                 onPressed: () {
-                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) =>  UploadScreen()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => UploadScreen()));
                 },
                 child: Text(
                   'Upload Photos',
@@ -58,7 +58,7 @@ class hotelhome extends StatelessWidget {
               width: 200,
               child: ElevatedButton(
                 onPressed: () {
-                   Navigator.push(context,
+                  Navigator.push(context,
                       MaterialPageRoute(builder: (context) => ItemListn()));
                 },
                 child: Text(
