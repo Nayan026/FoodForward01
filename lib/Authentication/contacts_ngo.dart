@@ -22,7 +22,7 @@ class ItemListn extends StatelessWidget {
       endDrawer: NavDrawer(),
       appBar: AppBar(
         backgroundColor: Color(0xFFe8772e),
-        title: const Text("Food Forward"),
+        title: const Text("Food Forward !"),
 
       ),
       body: StreamBuilder<QuerySnapshot>(
