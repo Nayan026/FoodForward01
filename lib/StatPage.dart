@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'nav-drawer.dart';
 
 class StatPage extends StatefulWidget {
   StatPage({super.key});
@@ -30,9 +31,9 @@ class _StatPageState extends State<StatPage> {
       Map<String, dynamic> data =
           documentSnapshot.data() as Map<String, dynamic>;
       setState(() {
-        question1 = data['question1'] as double;
-        question2 = data['question2'] as double;
-        question3 = data['question3'] as double;
+        question1 =   data['question1'] as double;
+        question2 =  data['question2'] as double;
+        question3 =  data['question3'] as double;
       });
     });
   }
@@ -40,11 +41,22 @@ class _StatPageState extends State<StatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      endDrawer: NavDrawer(),
       appBar: AppBar(
+         
         title: Text('Statistics'),
         backgroundColor: Color(0xFFe8772e),
       ),
-      body: Container(
+      
+      body:
+       Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Color(0xfdf6f1), Color(0xf6efe9)],
+          ),
+        ),
         padding: EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

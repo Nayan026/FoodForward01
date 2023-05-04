@@ -73,7 +73,7 @@ class ItemList extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Image.network(
-                                "https://images.pexels.com/photos/213780/pexels-photo-213780.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500", // Replace with the URL of your image
+                                "https://www.shutterstock.com/image-photo/healthy-food-clean-eating-selection-260nw-722718097.jpg", // Replace with the URL of your image
                                 width: double
                                     .infinity, // Set the width of the image to fill the available space
                                 height: 100, // Set the height of the image

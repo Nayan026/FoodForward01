@@ -3,7 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'final.dart';
 class markme extends StatefulWidget {
   const markme({super.key});
 
@@ -82,7 +82,7 @@ class _markmeState extends State<markme> {
                               child: Slider(
                                 min: 0,
                                 max: 100,
-                                divisions: 100,
+                                divisions: 10,
                                 value: q1Val,
                                 label: q1Val.abs().toString(),
                                 activeColor: Color(0xFFe8772e),
@@ -115,7 +115,7 @@ class _markmeState extends State<markme> {
                               child: Slider(
                                 min: 0,
                                 max: 100,
-                                divisions: 100,
+                                divisions: 10,
                                 value: q2Val,
                                 label: q2Val.abs().toString(),
                                 activeColor: Color(0xFFe8772e),
@@ -148,7 +148,7 @@ class _markmeState extends State<markme> {
                               child: Slider(
                                 min: 0,
                                 max: 100,
-                                divisions: 100,
+                                divisions: 10,
                                 value: q3Val,
                                 label: q3Val.abs().toString(),
                                 activeColor: Color(0xFFe8772e),
@@ -207,7 +207,11 @@ class _markmeState extends State<markme> {
                           'question3': q3Val,
                         })
                         .then((value) => {
-                              // Success!
+                              Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              finalpage()))
                             })
                         .catchError((error) => {
                               // Handle the error

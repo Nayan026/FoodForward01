@@ -8,6 +8,7 @@ class ImageListScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Image List'),
+        backgroundColor:  const Color(0xFFe8772e)
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('images').snapshots(),
@@ -43,7 +44,7 @@ class ImageListScreen extends StatelessWidget {
               context, MaterialPageRoute(builder: (context) => MyWidget()));
         },
         icon: Icon(Icons.volunteer_activism),
-        label: Text('Order Now'),
+        label: Text('Ask for Donation'),
       ),
     );
   }

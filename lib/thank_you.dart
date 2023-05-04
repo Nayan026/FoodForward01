@@ -10,32 +10,31 @@ class thanks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:
-      Column(
+      body: Column(
         children: [
-          Container( child: Image.asset('assets/logo.png')),
-          SizedBox(height: 40,),
+          Container(child: Image.asset('assets/logo.png')),
+          SizedBox(
+            height: 40,
+          ),
           Container(
             padding: EdgeInsets.all(20),
-        child: Text('Thank you for your selflessness and for making the world a better place \nYour contribution will have a lasting impact, and your kindness will never be forgotten.',
-        style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-      ),
-      Container(
-child: TextButton(onPressed: () { 
-
-   Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              markme()));
-
- },
-child:Text('Make your effots count \n           Click here',)),
-      )
-
+            child: Text(
+              'Thank you for your selflessness and for making the world a better place \nYour contribution will have a lasting impact, and your kindness will never be forgotten.',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Container(
+            child: TextButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => markme()));
+                },
+                child: Text(
+                  'Make your effots count \n           Click here',
+                )),
+          )
         ],
       ),
-      
     );
   }
 }

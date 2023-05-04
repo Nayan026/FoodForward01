@@ -39,6 +39,7 @@ class _UploadScreenState extends State<UploadScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Upload Photo'),
+        backgroundColor:  const Color(0xFFe8772e),
       ),
       body: Center(
         child: Column(
@@ -76,7 +77,7 @@ class _UploadScreenState extends State<UploadScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: _getImage,
         tooltip: 'Pick Image',
-        child: Icon(Icons.add_a_photo),
+        child: Icon(Icons.add_a_photo,color:  const Color(0xFFe8772e),),
       ),
     );
   }
