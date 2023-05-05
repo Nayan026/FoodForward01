@@ -5,6 +5,7 @@ import 'package:flutter_application_1/Splash/logo_screen.dart';
 import 'package:flutter_application_1/StatPage.dart';
 import 'package:flutter_application_1/Splash/logo_screen.dart';
 
+import'package:flutter_application_1/Authentication/who.dart';
 class NavDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,7 @@ class NavDrawer extends StatelessWidget {
             onTap: () {
               FirebaseAuth.instance.signOut();
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => logo_screen()));
+                  MaterialPageRoute(builder: (context) => who()));
             },
           ),
         ],

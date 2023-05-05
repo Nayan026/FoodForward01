@@ -44,7 +44,7 @@ class _splash3State extends State<splash3> {
           Container(
             margin: EdgeInsets.only(left: 20),
             child: const Text(
-              "Are You A\Social\nOrganization?",
+              "Are You A Social\nOrganization?",
               textScaleFactor: 2.0,
               style: TextStyle(color: Colors.brown, fontSize: 20.0),
             ),
@@ -55,7 +55,7 @@ class _splash3State extends State<splash3> {
           Container(
             margin: EdgeInsets.only(left: 20),
             child: const Text(
-                'Are you a social organization that\nprovides food for the poor?\nDont worry,weve got you covered!',
+                'Are you a social organization that\nprovides food for the poor?\nDont worry,we have got you covered!',
                 textScaleFactor: 1.0,
                 style: TextStyle(color: Colors.black, fontSize: 20.0)),
           ),

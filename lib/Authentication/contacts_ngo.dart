@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_application_1/nav-drawer.dart';
+import 'package:flutter_application_1/contactus_ngo.dart';
 
 
 class ItemListn extends StatelessWidget {
@@ -22,7 +23,7 @@ class ItemListn extends StatelessWidget {
       endDrawer: NavDrawer(),
       appBar: AppBar(
         backgroundColor: Color(0xFFe8772e),
-        title: const Text("Food Forward"),
+        title: const Text("Food Forward !"),
 
       ),
       body: StreamBuilder<QuerySnapshot>(
@@ -67,7 +68,7 @@ class ItemListn extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Image.network(
-                                "https://images.pexels.com/photos/213780/pexels-photo-213780.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500", // Replace with the URL of your image
+                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEr4aluIO41oAWwP0hCoXZGq7eFCMwVL-kLw&usqp=CAU", // Replace with the URL of your image
                                 width: double
                                     .infinity, // Set the width of the image to fill the available space
                                 height: 100, // Set the height of the image
@@ -98,7 +99,10 @@ class ItemListn extends StatelessWidget {
                                   backgroundColor: const Color(0xFFe8772e),
                                   elevation: 0,
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                   Navigator.push(context,
+                    MaterialPageRoute(builder: (context) =>  ngocontact()));
+                                },
                               ),
                             ],
                           ),
