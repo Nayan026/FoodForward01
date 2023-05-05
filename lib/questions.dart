@@ -212,6 +212,41 @@ class _markmeState extends State<markme> {
                         .catchError((error) => {
                               // Handle the error
                             });
+                    /*
+                    final user = auth.currentUser;
+                    if (user != null) {
+                      //this will get existing data from document
+                      final docRef =
+                          firestore.collection('Stat_info').doc('statistics');
+                      firestore.runTransaction((transaction) async {
+                        final docSnapshot = await transaction.get(docRef);
+                        if (docSnapshot.exists) {
+                          // updating existing data with new one
+                          final data = docSnapshot.data();
+                          final q1 = (data?['question1'] ?? 0) + q1Val;
+                          final q2 = (data?['question2'] ?? 0) + q2Val;
+                          final q3 = (data?['question3'] ?? 0) + q3Val;
+
+                          // here we will updating document with new one
+                          transaction.update(docRef, {
+                            'question1': q1,
+                            'question2': q2,
+                            'question3': q3,
+                          });
+                        } else {
+                          // if document does not exist it will create new one
+                          transaction.set(docRef, {
+                            'question1': q1Val,
+                            'question2': q2Val,
+                            'question3': q3Val,
+                          });
+                        }
+                      }).then((_) {
+                        print('data update successully!');
+                      }).catchError((error) {
+                        print('Failed to updata data: $error');
+                      });
+                    }*/
                   },
                 ),
               )

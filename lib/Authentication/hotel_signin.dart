@@ -40,7 +40,8 @@ class _Hotel_SigninState extends State<Hotel_Signin> {
     super.initState();
     hotelCollection = FirebaseFirestore.instance.collection('Hotel');
     user_hotelCollection = FirebaseFirestore.instance.collection('User-hotel');
-    contactNoCollection=FirebaseFirestore.instance.collection('contactNo-hotel');
+    contactNoCollection =
+        FirebaseFirestore.instance.collection('contactNo-hotel');
   }
 
   @override
@@ -142,8 +143,8 @@ class _Hotel_SigninState extends State<Hotel_Signin> {
                   };
                   user_hotelCollection.add(hotelCard);
 
-                  Map<String,dynamic>contactcard={
-                    'contactNo':contactNoController.text,
+                  Map<String, dynamic> contactcard = {
+                    'contactNo': contactNoController.text,
                   };
                   contactNoCollection.add(contactcard);
 
