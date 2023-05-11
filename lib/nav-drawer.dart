@@ -35,8 +35,8 @@ class NavDrawer extends StatelessWidget {
               style: TextStyle(color: Colors.brown, fontSize: 15.0),
             ),
             onTap: () {
-              //Navigator.push(
-                 // context, MaterialPageRoute(builder: (context) => StatPage()));
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => StatPage()));
             },
           ),
           ListTile(
