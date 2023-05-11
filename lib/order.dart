@@ -65,8 +65,8 @@ class MyWidget extends StatelessWidget {
               alignment: Alignment.center, child: const Text('Is your Confirmed?')),
           TextButton(
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const thanks()));
+               // Navigator.push(context,
+                   // MaterialPageRoute(builder: (context) => const thanks()));
               },
               child: const Text(
                 'Yes',
