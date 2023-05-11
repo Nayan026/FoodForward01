@@ -33,8 +33,8 @@ class finalpage extends StatelessWidget {
             ),
             onPressed: () {
               FirebaseAuth.instance.signOut();
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => StatPage()));
+              //Navigator.push(
+                //  context, MaterialPageRoute(builder: (context) => StatPage()));
             },
           ),
         ],
